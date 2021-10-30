@@ -1,4 +1,7 @@
 # Projects
 Projects for Data Science & Smart Contracts
 
-![](../../../../Downloads/Telegram Desktop/photo_2021-10-30_10-39-21.jpg)
+
+![ML_areas](https://user-images.githubusercontent.com/93018629/139535262-1fa515ef-81d9-467f-a345-22acb9a7104d.png)
+
+
