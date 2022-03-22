@@ -1,5 +1,5 @@
 # Projects
-Projects for Data Science & Smart Contracts
+Projects for Data Science
 
 
 ![ML_areas](https://user-images.githubusercontent.com/93018629/139535262-1fa515ef-81d9-467f-a345-22acb9a7104d.png)
