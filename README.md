@@ -20,4 +20,4 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 ## Real State
 
-- [Properarti](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properarti) - Regression
+- [Properarti](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properati) - Regression
