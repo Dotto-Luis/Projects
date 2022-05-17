@@ -8,14 +8,16 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 ## Consumer Discretionary
 
-- [Amazon](https://github.com/Dotto-Luis/Projects/tree/main/NLP_Amazon) NLP
+- [Amazon](https://github.com/Dotto-Luis/Projects/tree/main/NLP_Amazon) - NLP
 
 
 ## Financial
 
-- [NYSE](https://github.com/Dotto-Luis/Projects/tree/main/Finance/NYSE)
+- [NYSE](https://github.com/Dotto-Luis/Projects/tree/main/Finance/NYSE) - Regression
+
+- [Bank marketing](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank%20Marketing) - Classification
 
 
 ## Real State
 
-- [Properarti](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properarti)
+- [Properarti](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properarti) - Regression
