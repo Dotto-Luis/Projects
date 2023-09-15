@@ -15,18 +15,11 @@ def load(data_frames: Dict[str, DataFrame], database: Engine):
     # use pandas.Dataframe.to_sql() to load the dataframe into the database as a
     # table.
     # For the table name use the `data_frames` dict keys.
-    import pandas as pd
-    import os
-    csv_folder = 'C:/Users/n600/Documents/ML-Projects/AnyoneAI-SprintI/assignment/dataset/'
-    dataframes_dict = {}
-    file_list = os.listdir(csv_folder)
-    while file_list:
-        csv_filename = file_list.pop(0)
-        if csv_filename.endswith('.csv'):
-            csv_name = os.path.splitext(csv_filename)[0]
-            csv_path = os.path.join(csv_folder, csv_filename)
-            df = pd.read_csv(csv_path)
-            dataframes_dict[csv_name] = df
-    raise NotImplementedError
 
+    with database.begin() as connection:
+        for key, value in data_frames.items():
+            df_sql = value
+            df_sql.to_sql(key, connection, if_exists='replace', index=False)
 
+    
+    # raise NotImplementedError
