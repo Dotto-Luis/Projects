@@ -17,27 +17,27 @@
 
 
 SELECT 
-	STRFTIME('%Y', oo.order_estimated_delivery_date) AS 'Year',
-	STRFTIME('%m', oo.order_estimated_delivery_date) AS 'month_no',
-	CASE 
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '01' THEN 'jan'
-    WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '02' THEN 'feb'
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '03' THEN 'mar'
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '04' THEN 'apr' 
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '05' THEN 'may' 
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '06' THEN 'jun' 
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '07' THEN 'jul' 
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '08' THEN 'aug' 
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '09' THEN 'sep' 
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '10' THEN 'oct' 
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '11' THEN 'nov'
-	WHEN STRFTIME('%m', oo.order_estimated_delivery_date) = '12' THEN 'dec' END AS 'month',
-	AVG(CASE WHEN STRFTIME('%Y',oo.order_delivered_customer_date) = '2016' THEN JULIANDAY(oo.order_delivered_customer_date) - JULIANDAY(oo.order_estimated_delivery_date) ELSE 'NaN' END) AS 'Year2016_real_time',
-	AVG(CASE WHEN STRFTIME('%Y',oo.order_delivered_customer_date) = '2017' THEN JULIANDAY(oo.order_delivered_customer_date) - JULIANDAY(oo.order_estimated_delivery_date) ELSE 'NaN' END) AS 'Year2017_real_time',
-	AVG(CASE WHEN STRFTIME('%Y',oo.order_delivered_customer_date) = '2018' THEN JULIANDAY(oo.order_delivered_customer_date) - JULIANDAY(oo.order_estimated_delivery_date) ELSE 'NaN' END) AS 'Year2018_real_time',	
-    AVG(CASE WHEN STRFTIME('%Y', oo.order_estimated_delivery_date) = '2016' THEN JULIANDAY(oo.order_estimated_delivery_date) - JULIANDAY(oo.order_delivered_customer_date) ELSE NULL END) AS 'Year2016_estimated_time',
-    AVG(CASE WHEN STRFTIME('%Y', oo.order_estimated_delivery_date) = '2017' THEN JULIANDAY(oo.order_estimated_delivery_date) - JULIANDAY(oo.order_delivered_customer_date) ELSE NULL END) AS 'Year2017_estimated_time',
-    AVG(CASE WHEN STRFTIME('%Y', oo.order_estimated_delivery_date) = '2018' THEN JULIANDAY(oo.order_estimated_delivery_date) - JULIANDAY(oo.order_delivered_customer_date) ELSE NULL END) AS 'Year2018_estimated_time'
+	STRFTIME('%m', oo.order_purchase_timestamp) AS 'month_no',
+	CASE STRFTIME('%m', oo.order_purchase_timestamp) 
+        WHEN '01' THEN 'Jan'
+        WHEN '02' THEN 'Feb'
+        WHEN '03' THEN 'Mar'
+        WHEN '04' THEN 'Apr' 
+        WHEN '05' THEN 'May' 
+        WHEN '06' THEN 'Jun' 
+        WHEN '07' THEN 'Jul' 
+        WHEN '08' THEN 'Aug' 
+        WHEN '09' THEN 'Sep' 
+        WHEN '10' THEN 'Oct' 
+        WHEN '11' THEN 'Nov'
+        WHEN '12' THEN 'Dec' END AS 'month',
+	AVG(CASE WHEN STRFTIME('%Y', oo.order_purchase_timestamp) = '2016' THEN JULIANDAY(oo.order_delivered_customer_date) - JULIANDAY(oo.order_purchase_timestamp) ELSE NULL END) AS 'Year2016_real_time',
+	AVG(CASE WHEN STRFTIME('%Y', oo.order_purchase_timestamp) = '2017' THEN JULIANDAY(oo.order_delivered_customer_date) - JULIANDAY(oo.order_purchase_timestamp) ELSE NULL END) AS 'Year2017_real_time',
+	AVG(CASE WHEN STRFTIME('%Y', oo.order_purchase_timestamp) = '2018' THEN JULIANDAY(oo.order_delivered_customer_date) - JULIANDAY(oo.order_purchase_timestamp) ELSE NULL END) AS 'Year2018_real_time',	
+    AVG(CASE WHEN STRFTIME('%Y', oo.order_purchase_timestamp) = '2016' THEN JULIANDAY(oo.order_estimated_delivery_date) - JULIANDAY(oo.order_purchase_timestamp) ELSE NULL END) AS 'Year2016_estimated_time',
+    AVG(CASE WHEN STRFTIME('%Y', oo.order_purchase_timestamp) = '2017' THEN JULIANDAY(oo.order_estimated_delivery_date) - JULIANDAY(oo.order_purchase_timestamp) ELSE NULL END) AS 'Year2017_estimated_time',
+    AVG(CASE WHEN STRFTIME('%Y', oo.order_purchase_timestamp) = '2018' THEN JULIANDAY(oo.order_estimated_delivery_date) - JULIANDAY(oo.order_purchase_timestamp) ELSE NULL END) AS 'Year2018_estimated_time'
 FROM olist_orders oo
-WHERE order_status = 'delivered' AND order_delivered_customer_date IS NOT NULL AND oo.order_id IN (SELECT DISTINCT order_id FROM olist_orders)
-GROUP BY Year, month_no
+WHERE order_status = 'delivered' AND order_purchase_timestamp IS NOT NULL
+GROUP BY month_no
+ORDER BY month_no;
