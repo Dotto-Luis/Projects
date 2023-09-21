@@ -9,12 +9,11 @@
 -- 3. You can use the STRFTIME function to convert a order_delivered_customer_date to a string removing hours, minutes and seconds.
 -- 4. order_status == 'delivered' AND order_delivered_customer_date IS NOT NULL
 
-SELECT og.geolocation_state,
-       AVG(
-           CAST(JULIANDAY(oo.order_delivered_customer_date) AS INTEGER) - CAST(JULIANDAY(oo.order_estimated_delivery_date) AS INTEGER)
-       ) AS 'Average difference'
-FROM olist_orders oo
-JOIN olist_customers oc ON oo.customer_id = oc.customer_id
-JOIN olist_geolocation og ON oc.customer_zip_code_prefix = og.geolocation_zip_code_prefix
-WHERE order_status = 'delivered' AND order_delivered_customer_date IS NOT NULL
-GROUP BY og.geolocation_state;
+SELECT 
+    oc.customer_state AS State,
+    CAST(AVG(JULIANDAY(DATE(oo.order_estimated_delivery_date)) - JULIANDAY(DATE(oo.order_delivered_customer_date))) AS INTEGER) AS Delivery_Difference
+FROM olist_customers oc
+LEFT JOIN olist_orders oo ON oc.customer_id = oo.customer_id
+WHERE oo.order_status = 'delivered' AND oo.order_delivered_customer_date IS NOT NULL
+GROUP BY oc.customer_state
+ORDER BY Delivery_Difference;
