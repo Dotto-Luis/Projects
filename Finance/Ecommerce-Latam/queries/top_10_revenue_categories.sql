@@ -8,7 +8,7 @@
 
 SELECT pcnt.product_category_name_english AS Category, 
     COUNT(DISTINCT oo.order_id) AS Num_order, 
-    ROUND(SUM(oop.payment_value),0) AS Revenue
+    SUM(oop.payment_value) AS Revenue
 FROM olist_orders oo, olist_order_items ooi, olist_products op, product_category_name_translation pcnt, olist_order_payments oop 
 WHERE oo.order_id = ooi.order_id 
 	AND op.product_category_name = pcnt.product_category_name
