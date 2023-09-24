@@ -14,7 +14,7 @@ The original dataset is composed of multiple files with different information ab
 
 You don't have to worry about downloading the data, it will be automatically downloaded from the AnyoneAI - Sprint Project 02.ipynb notebook in Section 1 - Getting the data.
 
-These data comes from a project in Kaggle, and a Home Credit Compay calle Home Credit(https://www.homecredit.net/)
+These data comes from a project in [Kaggle](https://www.kaggle.com/competitions/home-credit-default-risk/overview), and a Home Credit Compay calle [Home Credit](https://www.homecredit.net/)
 
 ## Project Structure
 
