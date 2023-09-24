@@ -17,6 +17,8 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 - [Bank marketing](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank%20Marketing) - Classification
 
+- [Ecommerce_Latam](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Latam)
+
 
 ## Real State
 
