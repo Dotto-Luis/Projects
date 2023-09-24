@@ -24,26 +24,26 @@ def get_public_holidays(public_holidays_url: str, year: str) -> DataFrame:
     # You must convert the "date" column to datetime.
     # You must raise a SystemExit if the request fails. Research the raise_for_status
     # method from the requests library.
-    public_holidays_url = 'https://date.nager.at/api/v3/PublicHolidays'
-    url = f'{public_holidays_url}/{year}/BR'
+
+    url = public_holidays_url+'/'+year+'/BR/'
+
     try:
         response = requests.get(url)
-        response.raise_for_status()
-        data = response.json()
-        holidays_df = DataFrame(data)
-        holidays_df['date'] = to_datetime(holidays_df['date'])
-        holidays_df = holidays_df.drop(columns=['types', 'counties'])
-
-        return holidays_df
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data from API: {e}")
-        raise SystemExit
+    except requests.exceptions.RequestException as err:
+        raise SystemExit(err)
     
+    dict = response.json()
+
+    Holidays = DataFrame(dict)
+    Holidays = Holidays.drop(columns=['types', 'counties'], axis=1)
+    Holidays['date'] = to_datetime(Holidays['date'])
+
+    return(Holidays)
 
 
 def extract(
     csv_folder: str, csv_table_mapping: Dict[str, str], public_holidays_url: str
-) -> Dict[str, DataFrame]:    
+) -> Dict[str, DataFrame]:
     """Extract the data from the csv files and load them into the dataframes.
     Args:
         csv_folder (str): The path to the csv's folder.
@@ -54,12 +54,11 @@ def extract(
         Dict[str, DataFrame]: A dictionary with keys as the table names and values as
         the dataframes.
     """
-    csv_folder = r'C:\Users\n600\Documents\ML-Projects\AnyoneAI-SprintI\dataset'
-    
     dataframes = {
         table_name: read_csv(f"{csv_folder}/{csv_file}")
         for csv_file, table_name in csv_table_mapping.items()
     }
+
     holidays = get_public_holidays(public_holidays_url, "2017")
 
     dataframes["public_holidays"] = holidays
