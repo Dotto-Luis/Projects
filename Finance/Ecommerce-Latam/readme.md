@@ -63,7 +63,24 @@ Before starting to work, let's take a deep overview of the project structure and
 
 ## Requirement
 
+- Jupyter==1.0.0
+- black==22.12.0
+- db-sqlite3==0.0.1
+- matplotlib==3.6.2
+- pandas==1.5.2
+- plotly_express==0.4.1
+- requests==2.26.0
+- seaborn==0.11.2
+- SQLAlchemy==1.4.45
+- nbformat==5.7.3
+- pytest==7.2.1
+
+```pip install -r requirements.txt```
 
 
-```bash
-pip install -r requirements.txt
+## Project Origin
+
+This project is based on a [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) project.
+
+I'd like to thank AnyoneAI for their contribution and inspiration in the development of this project.
+
