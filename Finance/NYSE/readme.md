@@ -1,4 +1,4 @@
-# Bank Marketing #Classification
+# Bank Marketing #Regression
 
 
 ![Project3](https://raw.githubusercontent.com/Dotto-Luis/Projects/main/Finance/NYSE/pics/Bulls-vs.-Bears.jpg)
