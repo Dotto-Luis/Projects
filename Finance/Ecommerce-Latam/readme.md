@@ -60,3 +60,10 @@ Before starting to work, let's take a deep overview of the project structure and
 ├── README.md
 └── requirements.txt
 ```
+
+## Requirement
+
+
+
+```bash
+pip install -r requirements.txt
