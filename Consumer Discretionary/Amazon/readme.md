@@ -4,7 +4,7 @@
 
 ## Business Goal
 
-Amazon product reviews dataset for multilingual text classification. 
+ Utilize the Amazon product reviews dataset for multilingual text classification. The objective is to implement a model capable of analyzing product reviews and accurately assigning the appropriate star rating. This task raises a question for consideration: Is this primarily a Classification or Regression problem?
 
 ## About the data
 
