@@ -51,16 +51,12 @@ Before starting to work, let's take a deep overview of the project structure and
 ## Requirement
 
 - Jupyter==1.0.0
-- black==22.12.0
-- db-sqlite3==0.0.1
 - matplotlib==3.6.2
 - pandas==1.5.2
-- plotly_express==0.4.1
-- requests==2.26.0
 - seaborn==0.11.2
-- SQLAlchemy==1.4.45
-- nbformat==5.7.3
-- pytest==7.2.1
+- scikit-learn==1.2.1
+- nltk==3.8.1
+- re =2023.8.8
 
 ```pip install -r requirements.txt```
 
