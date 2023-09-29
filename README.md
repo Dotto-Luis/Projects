@@ -8,7 +8,7 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 ## Consumer Discretionary
 
-- [Amazon](https://github.com/Dotto-Luis/Projects/tree/main/NLP_Amazon) - NLP
+- [Amazon](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Amazon) - NLP
 
 
 ## Financial
