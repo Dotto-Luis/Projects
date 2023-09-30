@@ -8,18 +8,18 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 ## Consumer Discretionary
 
-- [Amazon](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Amazon) - NLP
+- [ReviewRatingModel-Amazon](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Amazon) - NLP
 
 
 ## Financial
 
-- [NYSE](https://github.com/Dotto-Luis/Projects/tree/main/Finance/NYSE) - Regression
+- [QuantitativeFinanceDataAnalysis-NYSE #EDA](https://github.com/Dotto-Luis/Projects/tree/main/Finance/NYSE) - EDA
 
-- [Bank marketing](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank%20Marketing) - Classification
+- [BankTermDepositSubscriptionPredictor-UCI](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank%20Marketing) - Classification
 
-- [Ecommerce_Latam](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Latam)
+- [EcommercePerformanceInsights-Olist](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Latam) - EDA
 
 
 ## Real State
 
-- [Properarti](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properati) - Regression
+- [RealEstatePricePredictor-Properati](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properati)  - Regression
