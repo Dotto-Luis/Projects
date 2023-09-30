@@ -1,4 +1,4 @@
-# Bank Marketing #Regression
+# QuantitativeFinanceDataAnalysis-NYSE #EDA
 
 
 ![Project3](https://raw.githubusercontent.com/Dotto-Luis/Projects/main/Finance/NYSE/pics/Bulls-vs.-Bears.jpg)
