@@ -3,6 +3,7 @@
 ![image](https://raw.githubusercontent.com/Dotto-Luis/Projects/main/Consumer%20Discretionary/SentimentAnalysis-Twitter/images/SentimentAnalysis-Twitter.png)
 
 https://www.kaggle.com/code/paoloripamonti/twitter-sentiment-analysis
+https://towardsdatascience.com/twitter-sentiment-analysis-with-node-js-ae1ed8dd8fa7
 
 ## Business Goal
 
