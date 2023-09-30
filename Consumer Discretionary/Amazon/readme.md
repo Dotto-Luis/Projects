@@ -1,4 +1,4 @@
-# Multilingual Amazon Reviews Corpus #NLP
+# ReviewRatingModel-Amazon #NLP
 
 ![image](https://user-images.githubusercontent.com/76250515/127223678-2b9938d2-a9ea-4eb8-b698-70ee804540ac.png)
 
