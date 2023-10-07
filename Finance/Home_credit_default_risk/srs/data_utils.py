@@ -1,10 +1,8 @@
 import os
 from typing import Tuple
-
 import gdown
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
 from src import config
 
 
@@ -74,7 +72,6 @@ def get_feature_target(
     # Assign to y_train the "TARGET" column
     # Assign to X_test all the columns from app_test except "TARGET"
     # Assign to y_test the "TARGET" column
-
     X_train = app_train.drop(columns=["TARGET"])
     y_train = app_train["TARGET"]
     X_test = app_test.drop(columns=["TARGET"])
@@ -122,4 +119,13 @@ def get_train_val_sets(
     # X_train, X_val, y_train, y_val = train_test_split(
     #    X_train, y_train, test_size=test_size, random_state=random_state, shuffle=True
     # )
+    from sklearn.model_selection import train_test_split
+
+    test_size = 0.2
+    random_state = 42
+
+    X_train, X_val, y_train, y_val = train_test_split(
+        X_train, y_train, test_size=test_size, random_state=random_state, shuffle=True
+    )
+
     return X_train, X_val, y_train, y_val
