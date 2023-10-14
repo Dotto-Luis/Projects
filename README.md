@@ -17,6 +17,8 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 - [BankTermDepositSubscriptionPredictor-UCI](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank%20Marketing) - Classification
 
+- [HomeCreditDefaultRisk-Home Credit](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Home_credit_default_risk) - Classification
+
 - [EcommercePerformanceInsights-Olist](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Latam) - EDA
 
 
