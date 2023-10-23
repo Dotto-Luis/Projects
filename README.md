@@ -8,20 +8,26 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 ## Consumer Discretionary
 
-- [ReviewRatingModel-Amazon](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Amazon) - NLP
+- [Review-Rating-Model-Amazon](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Amazon) - NLP
+
+- [Sentiment-Analysis-Twitter]() - NLP (wip)
 
 
-## Financial
+## Finance
 
-- [QuantitativeFinanceDataAnalysis-NYSE #EDA](https://github.com/Dotto-Luis/Projects/tree/main/Finance/NYSE) - EDA
+- [Quantitative-Finance-Data-Analysis-NYSE #EDA](https://github.com/Dotto-Luis/Projects/tree/main/Finance/NYSE) - EDA
 
-- [BankTermDepositSubscriptionPredictor-UCI](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank%20Marketing) - Classification
+- [Bank-Term-Deposit-Subscription-Predictor-UCI](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank%20Marketing) - Classification
 
-- [HomeCreditDefaultRisk-Home Credit](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Home_credit_default_risk) - Classification
+- [Home-Credit-Default-Risk-Home Credit](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Home_credit_default_risk) - Classification
 
-- [EcommercePerformanceInsights-Olist](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Latam) - EDA
+- [Ecommerce-Performance-Insights-Olist](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Latam) - EDA
 
 
 ## Real State
 
-- [RealEstatePricePredictor-Properati](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properati)  - Regression
+- [Real-Estate-Price-Predictor-Properati](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properati)  - Regression
+
+## Others
+
+- [Auto-Image-CNN]() - Classification (wip)
