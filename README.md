@@ -10,7 +10,7 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 - [Review-Rating-Model-Amazon](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Amazon) - NLP
 
-- [Sentiment-Analysis-Twitter]() - NLP (wip)
+- [Sentiment-Analysis-Twitter](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Sentiment-Analysis-Twitter) - NLP (wip)
 
 
 ## Finance
@@ -30,4 +30,4 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 ## Others
 
-- [Auto-Image-CNN]() - Classification (wip)
+- [Auto-Image-CNN](https://github.com/Dotto-Luis/Projects/tree/main/Others/Auto-Image-CNN) - Classification (wip)
