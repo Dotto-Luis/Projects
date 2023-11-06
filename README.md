@@ -27,7 +27,7 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 ## 💻 Information Technology
 
-- [Vehicle-Inventory-Classification-OnlineCars](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Vehicle-Inventory-Classification) - Classification
+- [Vehicle-Inventory-Classification-OnlineCars](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Vehicle-Inventory-Classification) - Classification (wip)
 
 ## 🏢 Real State
 
