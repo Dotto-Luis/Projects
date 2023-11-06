@@ -12,13 +12,15 @@ from tensorflow.keras.preprocessing import image
 # TODO
 # Connect to Redis and assign to variable `db``
 # Make use of settings.py module to get Redis settings like host, port, etc.
-db = None
+db = redis.Redis(host=settings.REDIS_IP, port=settings.REDIS_PORT, db=settings.REDIS_DB_ID)
+
 
 # TODO
 # Load your ML model and assign to variable `model`
 # See https://drive.google.com/file/d/1ADuBSE4z2ZVIdn66YDSwxKv-58U7WEOn/view?usp=sharing
 # for more information about how to use this model.
-model = None
+model = ResNet50(include_top=True, weights="imagenet")
+
 
 
 def predict(image_name):
@@ -41,7 +43,16 @@ def predict(image_name):
     pred_probability = None
 
     # TODO
-    raise NotImplementedError
+    img_path = os.path.join(settings.UPLOAD_FOLDER, image_name)
+    img = image.load_img(img_path, target_size=(224, 224))
+    img = image.img_to_array(img)
+    img = np.expand_dims(img, axis=0)
+    img = preprocess_input(img)
+
+    predictions = model.predict(img)
+    decoded_predictions = decode_predictions(predictions, top=1)[0]
+    class_name = decoded_predictions[0][1]
+    pred_probability = round(decoded_predictions[0][2],4)
 
     return class_name, pred_probability
 
@@ -72,6 +83,19 @@ def classify_process():
         # Hint: You should be able to successfully implement the communication
         #       code with Redis making use of functions `brpop()` and `set()`.
         # TODO
+
+        job_id, image_name = db.brpop(settings.REDIS_QUEUE)
+
+        job_id = job_id.decode("utf-8")
+
+        class_name, pred_probability = predict(image_name)
+
+        result = {
+            "prediction": class_name,
+            "score": pred_probability
+        }
+        db.set(job_id, json.dumps(result))
+
         raise NotImplementedError
 
         # Sleep for a bit

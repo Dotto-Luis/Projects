@@ -8,7 +8,11 @@ import settings
 # TODO
 # Connect to Redis and assign to variable `db``
 # Make use of settings.py module to get Redis settings like host, port, etc.
-db = None
+db = redis.StrictRedis(
+    host=settings.REDIS_IP,
+    port=settings.REDIS_PORT,
+    db=settings.REDIS_DB_ID
+)
 
 
 def model_predict(image_name):
@@ -34,7 +38,7 @@ def model_predict(image_name):
     # We need to assing this ID because we must be able to keep track
     # of this particular job across all the services
     # TODO
-    job_id = None
+    job_id = str(uuid4())
 
     # Create a dict with the job data we will send through Redis having the
     # following shape:
@@ -43,19 +47,22 @@ def model_predict(image_name):
     #    "image_name": str,
     # }
     # TODO
-    job_data = None
+    job_data = {
+        "id": job_id,
+        "image_name": image_name
+    }
 
     # Send the job to the model service using Redis
     # Hint: Using Redis `lpush()` function should be enough to accomplish this.
     # TODO
-    db.lpush(...)
+    db.lpush(settings.REDIS_QUEUE, json.dumps(job_data))
 
     # Loop until we received the response from our ML model
     while True:
         # Attempt to get model predictions using job_id
         # Hint: Investigate how can we get a value using a key from Redis
         # TODO
-        output = None
+        output = db.get(job_id)
 
         # Check if the text was correctly processed by our ML model
         # Don't modify the code below, it should work as expected

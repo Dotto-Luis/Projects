@@ -10,6 +10,8 @@ services:
         - GID=${GID}
       context: ./api
       target: build
+    env_file:
+      - .env
     ports:
       - "80:5000"
     environment:
@@ -35,6 +37,8 @@ services:
         - GID=${GID}
       context: ./model
       target: build
+    env_file:
+      - .env
     depends_on:
       - redis
     volumes:
