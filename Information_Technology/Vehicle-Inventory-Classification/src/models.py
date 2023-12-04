@@ -92,7 +92,7 @@ def create_lenet_model(
 
     # Layer 2: Average pooling layer with 2x2 pool size
     # TODO
-    model.add(AveragePooling2D(pool_size=(2, 2))
+    model.add(AveragePooling2D(pool_size=(2, 2)))
 
     # Layer 3: Convolutional layer with 16 filters, each 3x3 in size,
     # followed by a tanh activation function
@@ -101,7 +101,7 @@ def create_lenet_model(
 
     # Layer 4: Average pooling layer with 2x2 pool size
     # TODO
-    model.add(AveragePooling2D(pool_size=(2, 2))
+    model.add(AveragePooling2D(pool_size=(2, 2)))
 
     # Layer 5: Flatten layer to convert the output of the previous layer to a 1D array
     # TODO
