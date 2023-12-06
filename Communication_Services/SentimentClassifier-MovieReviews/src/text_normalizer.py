@@ -35,6 +35,8 @@ def remove_html_tags(text: str) -> str:
             Output string.
     """
     # TODO
+    soup = BeautifulSoup(text, "html.parser")
+    return soup.get_text()
     raise NotImplementedError
 
 
@@ -54,6 +56,10 @@ def stem_text(text: str) -> str:
             Output string.
     """
     # TODO
+    porter = nltk.PorterStemmer()
+    words = word_tokenize(text)
+    stemmed_words = [porter.stem(word) for word in words]
+    return ' '.join(stemmed_words)
     raise NotImplementedError
 
 
@@ -72,6 +78,10 @@ def lemmatize_text(text: str) -> str:
             Output string.
     """
     # TODO
+    doc = nlp(text)
+    lemmatized_text = ' '.join([token.lemma_ for token in doc])
+    return lemmatized_text
+
     raise NotImplementedError
 
 
@@ -88,6 +98,9 @@ def remove_accented_chars(text: str) -> str:
             Output string.
     """
     # TODO
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+    return text
+
     raise NotImplementedError
 
 
@@ -106,6 +119,9 @@ def remove_special_chars(text: str, remove_digits: Optional[bool] = False) -> st
             Output string.
     """
     # TODO
+    pattern = r'[^a-zA-Z0-9\s]' if not remove_digits else r'[^a-zA-Z\s]'
+    text = re.sub(pattern, '', text)
+    return text
     raise NotImplementedError
 
 
@@ -132,6 +148,13 @@ def remove_stopwords(
             Output string.
     """
     # TODO
+    tokens = tokenizer.tokenize(text)
+    tokens = [token.strip() for token in tokens]
+    if is_lower_case:
+        filtered_tokens = [token for token in tokens if token.lower() not in stopwords]
+    else:
+        filtered_tokens = [token for token in tokens if token not in stopwords]
+    return ' '.join(filtered_tokens)
     raise NotImplementedError
 
 
@@ -148,6 +171,7 @@ def remove_extra_new_lines(text: str) -> str:
             Output string.
     """
     # TODO
+    return re.sub(r'\s+', ' ', text)
     raise NotImplementedError
 
 
@@ -164,6 +188,7 @@ def remove_extra_whitespace(text: str) -> str:
             Output string.
     """
     # TODO
+    return ' '.join(text.split())
     raise NotImplementedError
 
 
