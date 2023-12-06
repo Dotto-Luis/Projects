@@ -28,4 +28,16 @@ def vectorizer(
             document in the corpus.
     """
     # TODO
+    def get_vector(word):
+        if word in model.wv:
+            return model.wv[word]
+        else:
+            return np.zeros(num_features)
+
+    corpus_vectors = []
+    for doc in corpus:
+        doc_vector = np.mean([get_vector(word) for word in doc], axis=0)
+        corpus_vectors.append(doc_vector)
+
+    return np.array(corpus_vectors)
     raise NotImplementedError

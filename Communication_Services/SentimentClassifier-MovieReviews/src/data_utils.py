@@ -61,4 +61,11 @@ def split_data(
             List labels for test
     """
     # TODO
+        # Assuming the target column is named 'label' and the feature columns are the rest
+    X_train = train.drop('label', axis=1)
+    y_train = train['label']
+    
+    X_test = test.drop('label', axis=1)
+    y_test = test['label']
 
+    return X_train, y_train, X_test, y_test
