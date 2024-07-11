@@ -1,7 +1,8 @@
 # Fintech-Advisor-Chatbot #NLP
  
 
-![Project3](https://github.com/Dotto-Luis/Projects/assets/93018629/ee20e50b-0188-4c2e-aa0f-0be02a087333)
+![finance-chatbot](https://github.com/Dotto-Luis/Projects/assets/93018629/f0e76fac-972a-4505-bbaa-c883bdb9d6cb)
+
 
 ## Business Goal
 
