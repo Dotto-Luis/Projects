@@ -14,35 +14,65 @@ For developing this kind of solution I will need first to extract all the text d
 
 ## About the data
 
-The original dataset is composed of multiple files with different information about loans taken. In this project, we will work exclusively with the primary files: application_train_aai.csv and application_test_aai.csv.
+The provided dataset is a subset of the ones listed on the website www.annualreports.com. More specifically, our dataset is composed of public documents (Annual reports and 10-K statements) from the last 5 years from all the companies listed in the NASDAQ stock market (around 2600 companies).
 
-You don't have to worry about downloading the data, it will be automatically downloaded from the AnyoneAI - Sprint Project 02.ipynb notebook in Section 1 - Getting the data.
+The dataset can be found in AWS S3. To access the dataset you will have to use the boto3 library and here are the key and secret keys that you can use for read-only access.
 
-These data comes from a project in [Kaggle](https://www.kaggle.com/competitions/home-credit-default-risk/overview), and a Home Credit Compay calle [Home Credit](https://www.homecredit.net/)
+- Dataset: s3://anyoneai-datasets/nasdaq_annual_reports/
+- Key: AKIA2JHUK4EGBAMYAYFY
 
 ## Project Structure
 
 Before starting to work, let's take a deep overview of the project structure and each module inside:
 
 ```console
-├── dataset
-│   ├── application_test_aai.csv
-│   ├── application_train_aai.csv
-│   ├── HomeCredit_columns_description.csv
-├── src
-│   ├── __init__.py
-│   ├── config.py
-│   ├── data_utils.py
-│   ├── preprocessing.py
-└── tests
-│   ├── __init__.py
-│   ├── conftest.py
-│   ├── test_data_utils.py
-│   └── test_preprocessing.py
-├── ASSIGNMENT.md
-├── Home_credit_default_risk.ipynb
-├── README.md
-└── requirements.txt
+fchat/
+│
+├── api/                     # Code for the API that interacts with the chatbot
+│   ├── Dockerfile            # Dockerfile for the API
+│   ├── app.py                # Main API code
+│   ├── middleware.py         # Middleware for the API
+│   ├── views.py              # Views or routes for the API
+│   ├── settings.py           # Configuration settings for the API
+│   ├── utils.py              # Utility functions for the API
+│   ├── templates/            # HTML templates for the UI
+│   │   └── index.html        # Main template
+│   └── tests/                # Unit tests for the API
+│       ├── test_api.py       # API tests
+│       └── test_utils.py     # Utility tests
+│
+├── model/                   # Code for the Natural Language Processing (NLP) model
+│   ├── Dockerfile            # Dockerfile for the model
+│   ├── ml_service.py         # Machine learning service code
+│   ├── settings.py           # Configuration settings for the model
+│   └── tests/                # Unit tests for the model
+│       └── test_model.py     # Model tests
+│
+├── data/                    # Data related to the project
+│   ├── raw/                 # Raw data (downloaded from S3)
+│   └── processed/           # Processed data
+│
+├── notebooks/               # Jupyter notebooks for exploratory data analysis (EDA) and prototypes
+│   └── exploratory_analysis.ipynb  # EDA notebook
+│
+├── scripts/                 # Utility scripts for data processing, training, etc.
+│   ├── download_data.py      # Script for downloading data from AWS S3
+│   ├── preprocess_data.py    # Script for preprocessing data
+│   └── other_scripts.py      # Other useful scripts
+│
+├── stress_test/             # Stress tests for the API
+│   └── locustfile.py         # Locust configuration file for load testing
+│
+├── ui/                      # Code for the user interface
+│   ├── Dockerfile            # Dockerfile for the UI
+│   ├── app.py                # Main UI code
+│   └── templates/            # HTML/CSS/JS templates for the UI
+│       └── index.html        # Main UI page
+│
+├── docker-compose.yml       # Docker Compose file for orchestrating containers
+├── README.md                # Project documentation
+└── requirements.txt         # Python dependencies for the project
+
 ```
 
 ## Requirement
