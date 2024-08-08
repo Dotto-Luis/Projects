@@ -91,9 +91,12 @@ Here is the list of required packages:
 - black==22.12.0
 - db-sqlite3==0.0.1
 - matplotlib==3.6.2
-- pandas==1.5.2
+- pandas==1.4.4
+- numpy==1.22.4
+- scipy==1.8.0
+- statsmodels==0.13.2
 - plotly_express==0.4.1
-- requests==2.32.3
+- requests==2.26.0
 - seaborn==0.11.2
 - SQLAlchemy==1.4.45
 - nbformat==5.7.3
