@@ -13,29 +13,29 @@ Order by The Global Industry Classification Standard ([GICS](https://www.msci.co
 
 ## 🛍️ Consumer Discretionary
 
-- [Review-Rating-Model-Amazon](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Amazon) - NLP
-
-- [Sentiment-Analysis-Twitter](https://github.com/Dotto-Luis/Projects/tree/main/Consumer%20Discretionary/Sentiment-Analysis-Twitter) - NLP (wip)
+- [Sentiment-Analysis-Twitter](https://github.com/Dotto-Luis/Projects/tree/main/Communication_Services/SentimentClassifier-MovieReviews) - NLP (wip)
 
 
 ## 💰 Finance
 
-- [Quantitative-Finance-Data-Analysis-NYSE #EDA](https://github.com/Dotto-Luis/Projects/tree/main/Finance/NYSE) - EDA
+- [Quantitative-Finance-Data-Analysis-NYSE #EDA](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Quantitative-Finance-Data-Analysis) - EDA
 
-- [Bank-Term-Deposit-Subscription-Predictor-UCI](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank%20Marketing) - Classification
+- [Bank-Term-Deposit-Subscription-Predictor-UCI](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank-Term-Deposit-Subscription-Predictor) - Classification
 
-- [Home-Credit-Default-Risk-Home Credit](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Home_credit_default_risk) - Classification
+- [Home-Credit-Default-Risk-Home Credit](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Home-Credit-Default-Risk) - Classification
 
-- [Ecommerce-Performance-Insights-Olist](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Latam) - EDA
+- [Ecommerce-Performance-Insights-Olist](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Performance-Insights) - EDA
 
 
 ## 💻 Information Technology
 
 - [Vehicle-Inventory-Classification-OnlineCars](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Vehicle-Inventory-Classification) - Classification (wip)
+- [NYCTaxiFarePrediction](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/NYCTaxiFarePrediction) - Classification (wip)
 
 ## 🏢 Real State
 
-- [Real-Estate-Price-Predictor-Properati](https://github.com/Dotto-Luis/Projects/tree/main/Real%20State/Properati)  - Regression
+- [Real-Estate-Price-Predictor-Properati](https://github.com/Dotto-Luis/Projects/tree/main/Real_State/Real-Estate-Price-Predictor)  - Regression
+- [Housing-Price-Prediction-Ames](https://github.com/Dotto-Luis/Projects/tree/main/Real_State/Housing-Price-Prediction-Ames)  - Regression (wip)
 
 ## 📁 Others
 
