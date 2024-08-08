@@ -1,0 +1,19 @@
+# Specific virtual environment
+envEPI/
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Jupyter Notebook configuration files
+.ipynb_checkpoints/
+
+# System configuration files
+.DS_Store
+
+# Log files
+*.log
+
+# IDE configurations
+.idea/
+.vscode/
