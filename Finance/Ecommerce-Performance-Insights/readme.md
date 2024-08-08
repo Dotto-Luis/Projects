@@ -93,7 +93,7 @@ Here is the list of required packages:
 - matplotlib==3.6.2
 - pandas==1.5.2
 - plotly_express==0.4.1
-- requests==2.26.0
+- requests==2.32.3
 - seaborn==0.11.2
 - SQLAlchemy==1.4.45
 - nbformat==5.7.3
