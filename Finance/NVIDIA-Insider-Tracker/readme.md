@@ -1,6 +1,6 @@
 # NVIDIA Insider Trade Tracker
 
-![NVIDIA Insider Trade Tracker](https://example.com/image.png) <!-- Reemplaza con una imagen relevante -->
+![NVIDIA Insider Trade Tracker](https://github.com/user-attachments/assets/6feac50b-6d00-444b-bb0a-c19fd670403c)
 
 ## Table of Contents
 
