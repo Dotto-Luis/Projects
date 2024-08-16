@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Dict
 
-DATASET_ROOT_PATH = str(Path(__file__).parent.parent / "dataset")
+DATASET_ROOT_PATH = str(Path(__file__).parent.parent / "datasets")
 QUERIES_ROOT_PATH = str(Path(__file__).parent.parent / "queries")
 QUERY_RESULTS_ROOT_PATH = str(Path(__file__).parent.parent / "tests/query_results")
 PUBLIC_HOLIDAYS_URL = "https://date.nager.at/api/v3/publicholidays"

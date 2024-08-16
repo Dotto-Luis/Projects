@@ -172,13 +172,13 @@ def query_freight_value_weight_relationship(database: Engine) -> QueryResult:
     # TODO: Merge items, orders and products tables on 'order_id'/'product_id'.
     # We suggest to use pandas.merge() function.
     # Assign the result to the `data` variable.
-    data = pd.merge(pd.merge(orders, items, on='order_id'), products, on='product_id')
+    data = pd.merge(pd.merge(orders, items, on="order_id"), products, on="product_id")
 
     # TODO: Get only delivered orders.
     # Using the previous results from the merge (stored in `data` variable),
     # apply a boolean mask to keep only the 'delivered' orders.
     # Assign the result to the variable `delivered`.
-    delivered = data[data['order_status'] == 'delivered']
+    delivered = data[data["order_status"] == "delivered"]
 
     # TODO: Get the sum of freight_value and product_weight_g for each order_id.
     # The same order (identified by 'order_id') can have multiple products inside,
@@ -188,7 +188,11 @@ def query_freight_value_weight_relationship(database: Engine) -> QueryResult:
     # look at pandas.DataFrame.groupby() and pandas.DataFrame.agg() for the data
     # transformation.
     # Store the result in the `aggregations` variable.
-    aggregations = delivered.groupby('order_id').agg({'freight_value':'sum', 'product_weight_g':'sum'}).reset_index()
+    aggregations = (
+        delivered.groupby("order_id")
+        .agg({"freight_value": "sum", "product_weight_g": "sum"})
+        .reset_index()
+    )
 
     # Keep the code below as it is, this will return the result from
     # `aggregations` variable with the corresponding name and format.
@@ -223,22 +227,28 @@ def query_orders_per_day_and_holidays_2017(database: Engine) -> QueryResult:
     # Replace the content for the column `order_purchase_timestamp` in the `orders`
     # DataFrame with the same data but converted to datetime.
     # We suggest you to read about how to use pd.to_datetime() for this.
-    orders["order_purchase_timestamp"] = pd.to_datetime(orders['order_purchase_timestamp'])
-    orders["order_purchase_timestamp"] = orders["order_purchase_timestamp"].dt.normalize() 
+    orders["order_purchase_timestamp"] = pd.to_datetime(
+        orders["order_purchase_timestamp"]
+    )
+    orders["order_purchase_timestamp"] = orders[
+        "order_purchase_timestamp"
+    ].dt.normalize()
 
     # TODO: Filtering only the order purchase timestamps from the year 2017.
     # Using the `orders` DataFrame, apply a boolean mask for retrieving all the
     # columns but only the rows corresponding to the year 2017.
     # Assign the result to a new variable called `filtered_dates`.
-    filtered_dates = orders[orders['order_purchase_timestamp'].dt.strftime('%Y') == '2017' ]
-
+    filtered_dates = orders[
+        orders["order_purchase_timestamp"].dt.strftime("%Y") == "2017"
+    ]
 
     # TODO: Counting the orders per day.
     # Using the `filtered_dates` DataFrame, count how many orders were made on
     # each day.
     # Assign the result to the `order_purchase_ammount_per_date` variable.
-    order_purchase_ammount_per_date = pd.DataFrame(filtered_dates.groupby('order_purchase_timestamp')['order_id'].count()).reset_index(drop=False)
-
+    order_purchase_ammount_per_date = pd.DataFrame(
+        filtered_dates.groupby("order_purchase_timestamp")["order_id"].count()
+    ).reset_index(drop=False)
 
     # TODO: Creating a dataframe with the result. Assign it to `result_df` variable.
     # Now we will create the final DataFrame for the output.
@@ -249,9 +259,11 @@ def query_orders_per_day_and_holidays_2017(database: Engine) -> QueryResult:
     #   - 'holiday': boolean column having True when that date is a holiday or,
     #                False otherwise. Use the `holidays` DataFrame for this.
     result_df = pd.DataFrame()
-    result_df['order_count'] = order_purchase_ammount_per_date['order_id']
-    result_df['date'] = order_purchase_ammount_per_date['order_purchase_timestamp']
-    result_df['holiday'] = order_purchase_ammount_per_date['order_purchase_timestamp'].isin(holidays['date'])
+    result_df["order_count"] = order_purchase_ammount_per_date["order_id"]
+    result_df["date"] = order_purchase_ammount_per_date["order_purchase_timestamp"]
+    result_df["holiday"] = order_purchase_ammount_per_date[
+        "order_purchase_timestamp"
+    ].isin(holidays["date"])
 
     # Keep the code below as it is, this will return the result from
     # `aggregations` variable with the corresponding name and format.
