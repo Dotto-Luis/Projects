@@ -28,6 +28,16 @@ The first one is a Brazilian e-commerce public dataset of orders made at the Oli
 
 The second source is a public API: https://date.nager.at. You will use it to retrieve information about Brazil's Public Holidays and correlate that with certain metrics about the delivery of products.
 
+<details>
+  <summary>  1. Data schema 🗂️</summary>
+
+  ![Image Description](https://raw.githubusercontent.com/Dotto-Luis/Projects/2527e12fd79f4527b7e0aad9e2c2a0fb0f6637d9/Finance/Ecommerce-Performance-Insights/Images/data_schema.png)
+
+</details>
+
+2. [API 🌐](https://date.nager.at)
+
+
 ## 3. Usage Examples (wip)
 
 ## 4. Project Structure
@@ -37,7 +47,7 @@ The second source is a public API: https://date.nager.at. You will use it to ret
   Here's a detailed overview of the project structure and each module inside:
 
 ```console
-├── dataset
+├── datasets
 │   ├── olist_customers_dataset.csv
 │   ├── olist_geolocation_dataset.csv
 │   ├── olist_order_items_dataset.csv
@@ -66,13 +76,13 @@ The second source is a public API: https://date.nager.at. You will use it to ret
 │   ├── load.py
 │   ├── plots.py
 │   └── transform.py
-└── tests
+└── test
 │   ├── __init__.py
 │   ├── query_results/
 │   ├── test_extract.py
 │   └── test_transform.py
 ├── ASSIGNMENT.md
-├── Ecommerce-Latam.ipynb
+├── Ecommerce-Performance-Insights.ipynb
 ├── README.md
 └── requirements.txt
 ```

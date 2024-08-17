@@ -1,20 +1,9 @@
-from typing import Dict
+from sqlalchemy.engine import Engine
+import pandas as pd
+from sqlalchemy import text
 
-from pandas import DataFrame
-from sqlalchemy.engine.base import Engine
-
-
-def load(data_frames: Dict[str, DataFrame], database: Engine):
-    """Load the dataframes into the sqlite database.
-
-    Args:
-        data_frames (Dict[str, DataFrame]): A dictionary with keys as the table names
-        and values as the dataframes.
-    """
-
-    with database.begin() as connection:
-        for key, value in data_frames.items():
-            df_sql = value
-            df_sql.to_sql(key, connection, if_exists="replace", index=False)
-
-    # raise NotImplementedError
+def load(data_frames: dict, database: Engine):
+    """Load dataframes into the specified database."""
+    with database.connect() as connection:
+        for key, df in data_frames.items():
+            df.to_sql(name=key, con=connection, if_exists="replace", index=False)

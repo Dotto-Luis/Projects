@@ -17,3 +17,7 @@ __pycache__/
 # IDE configurations
 .idea/
 .vscode/
+
+# Ignore databases and files
+*.db
+*.csv
