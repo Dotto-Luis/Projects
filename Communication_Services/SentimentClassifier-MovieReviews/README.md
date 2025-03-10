@@ -1,6 +1,6 @@
 # Sentiment Classifier Movie Reviews #NLP
 
-![alt text](image.png)
+![image](https://github.com/Dotto-Luis/Projects/blob/main/Communication_Services/SentimentClassifier-MovieReviews/images/Cover.png)
 
 
 ## Table of Contents
@@ -17,7 +17,7 @@
 
 ## 1. Business Goal
 
-This project is related to NLP. As you may already know, the most important and hardest part of an NLP project is pre-processing, which is why I are going to focus on that.
+This project is related to NLP. As you may already know, the most important and hardest part of an NLP project is pre-processing, which is why I am going to focus on that.
 
 Basically this is a basic sentiment analysis problem, as in this case, consists of a classification problem, where the possible output labels are: `positive` and `negative`. Which indicates, if the review of a movie speaks positively or negatively. In our case it is a binary problem, but one could have many more "feelings" tagged and thus allow a more granular analysis.
 
