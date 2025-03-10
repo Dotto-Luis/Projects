@@ -2,53 +2,88 @@
 
 ![image](https://user-images.githubusercontent.com/76250515/127223678-2b9938d2-a9ea-4eb8-b698-70ee804540ac.png)
 
-## Business Goal
+## Table of Contents
 
- Utilize the Amazon product reviews dataset for multilingual text classification. The objective is to implement a model capable of analyzing product reviews and accurately assigning the appropriate star rating. This task raises a question for consideration: Is this primarily a Classification or Regression problem?
+1. [Business Goal](#business-goal)
+2. [About the Data](#about-the-data)
+3. [Usage Examples](#usage-examples)
+4. [Project Structure](#project-structure)
+5. [Requirements](#requirements)
+6. [Tests](#tests)
+7. [Contributing](#contributing)
+8. [License](#license)
+9. [Project Origin](#project-origin)
 
-## About the data
+## 1. Business Goal
 
-The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. 'books', 'appliances', etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
+The objective of this project is to build a **multilingual text classification model** using Amazon product reviews. The model will analyze written product reviews and **predict the corresponding star rating (1-5 stars)**. 
 
-For each language, there are 200,000, 5,000 and 5,000 reviews in the training, development and test sets respectively. The maximum number of reviews per reviewer is 20 and the maximum number of reviews per product is 20. All reviews are truncated after 2,000 characters, and all reviews are at least 20 characters long.
+This problem can be approached as either:
+- **Classification:** Assigning each review to one of five discrete rating categories.
+- **Regression:** Predicting a continuous rating score.
 
-Note that the language of a review does not necessarily match the language of its marketplace (e.g. reviews from amazon.de are primarily written in German, but could also be written in English, etc.). For this reason, we applied a language detection algorithm based on the work in Bojanowski et al. (2017) to determine the language of the review text and we removed reviews that were not written in the expected language.
+Through this project, we aim to explore different modeling approaches and assess the impact of NLP preprocessing, feature engineering, and model selection.
 
-## Project Structure
+## 2. About the Data
 
-Before starting to work, let's take a deep overview of the project structure and each module inside:
+This project uses the **Multilingual Amazon Reviews Corpus**, a dataset provided by **AWS Open Data**. It contains product reviews across multiple languages from **November 2015 to November 2019**.
+
+### **Dataset Details**
+- **Source:** [AWS Open Data - Amazon Reviews](https://docs.opendata.aws/amazon-reviews-ml/readme.html)
+- **Languages:** English, Spanish, German, French, Japanese, and others.
+- **Features:**
+  - `review_id`: Unique ID for each review.
+  - `product_id`: Anonymized product identifier.
+  - `review_title`: Title of the review.
+  - `review_body`: Full text of the review.
+  - `star_rating`: Target variable (1-5 stars).
+  - `language`: Language of the review.
+  - `product_category`: High-level product classification.
+
+## 3. Usage Examples (WIP)
+
+## 4. Project Structure
+<details>
+  <summary>📂 Expand for Project Structure</summary>
 
 ```console
-├── dataset
-│   ├── olist_customers_dataset.csv
-│   ├── olist_geolocation_dataset.csv
-│   ├── olist_order_items_dataset.csv
+├── datasets
+│   ├── amazon_reviews_train.csv
+│   └── amazon_reviews_test.csv
 ├── images
-│   ├── data_schema.png
-│   ├── freight_value_weight_relationship.png
-│   └── orders_per_day_and_holidays.png
-├── queries
-│   ├── delivery_date_difference.sql
-│   ├── global_ammount_order_status.sql
+│   └── Cover.png
 ├── src
+│   ├── __init__.py
+│   ├── config.py
+│   ├── extract.py
+│   ├── load.py
+│   ├── preprocess.py
+│   ├── train.py
+│   ├── evaluate.py
+│   └── utils.py
+├── test
 │   ├── __init__.py
-│   ├── config.py
-│   ├── extract.py
-│   ├── load.py
-│   ├── plots.py
-│   └── transform.py
-└── tests
-│   ├── __init__.py
-│   ├── query_results/
-│   ├── test_extract.py
-│   └── test_transform.py
-├── ASSIGNMENT.md
-├── Ecommerce-Latam.ipynb
+│   ├── test_preprocessing.py
+│   ├── test_model.py
+│   └── test_pipeline.py
+├── notebooks
+│   ├── EDA.ipynb
+│   ├── Model_Training.ipynb
+│   ├── Model_Evaluation.ipynb
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+└── LICENSE
+```
+</details>
+
+## 5. Requirement
+To set up the environment, install the necessary dependencies using:
+
+``` bash
+pip install -r requirements.txt
 ```
 
-## Requirement
+Here is the list of required packages:
 
 - Jupyter==1.0.0
 - matplotlib==3.6.2
@@ -58,17 +93,32 @@ Before starting to work, let's take a deep overview of the project structure and
 - nltk==3.8.1
 - re =2023.8.8
 
-```pip install -r requirements.txt```
+## 6. Tests
+
+Basic unit tests are included to ensure proper functionality of preprocessing, model training, and evaluation.
+
+Run tests with:
+
+```console
+$ pytest tests/
+```
+
+## 7. Contributing
+
+I welcome contributions to this project. If you have suggestions or improvements, please follow these steps:
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Create a new Pull Request.
 
 
-## Project Origin
+## 8. License
 
-This project is based on a [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) project.
+By accessing the **Multilingual Amazon Reviews Corpus** ("Reviews Corpus"), you agree to the [Amazon Conditions of Use](https://www.amazon.com/gp/help/customer/display.html/ref=footer_cou?ie=UTF8&nodeId=508088).
 
-I'd like to thank AnyoneAI for their contribution and inspiration in the development of this project.
 
-## Licence
+## 9. Project Origin
 
-By accessing the Multilingual Amazon Reviews Corpus ("Reviews Corpus"), you agree that the Reviews Corpus is an Amazon Service subject to the Amazon.com Conditions of Use (https://www.amazon.com/gp/help/customer/display.html/ref=footer_cou?ie=UTF8&nodeId=508088) and you agree to be bound by them, with the following additional conditions:
-
-In addition to the license rights granted under the Conditions of Use, Amazon or its content providers grant you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to access and use the Reviews Corpus for purposes of academic research. You may not resell, republish, or make any commercial use of the Reviews Corpus or its contents, including use of the Reviews Corpus for commercial research, such as research related to a funding or consultancy contract, internship, or other relationship in which the results are provided for a fee or delivered to a for-profit organization. You may not (a) link or associate content in the Reviews Corpus with any personal information (including Amazon customer accounts), or (b) attempt to determine the identity of the author of any content in the Reviews Corpus. If you violate any of the foregoing conditions, your license to access and use the Reviews Corpus will automatically terminate without prejudice to any of the other rights or remedies Amazon may have.
+This project is based on a [AWS](https://docs.opendata.aws/amazon-reviews-ml/readme.html) dataset.
