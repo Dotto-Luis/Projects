@@ -1,6 +1,6 @@
 # SentimentAnalysis-Twitter #NLP
 
-![image](https://user-images.githubusercontent.com/76250515/127223678-2b9938d2-a9ea-4eb8-b698-70ee804540ac.png)
+![image](https://raw.githubusercontent.com/Dotto-Luis/Projects/refs/heads/main/Consumer_Discretionary/Sentiment-Analysis-Twitter/images/Cover.png)
 
 ## Table of Contents
 
