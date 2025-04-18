@@ -1,6 +1,6 @@
 # HuggingFace-LangChain-Chatbot
 
-![image](Information_Technology/HuggingFace-LangChain-Chatbot/images/cover.png)
+![image](https://raw.githubusercontent.com/Dotto-Luis/Projects/refs/heads/main/Information_Technology/HuggingFace-LangChain-Chatbot/images/cover.png)
 
 ## Table of Contents
 
