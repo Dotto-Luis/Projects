@@ -63,7 +63,7 @@ This project uses **publicly available banking documents**, such as:
 
 ```console
 ├── data
-│   └── cuenta_bbva.pdf
+│   └── Spain_unicaja_Fixed_Mortage.pdf
 ├── images
 │   └── cover.png
 ├── src
@@ -75,7 +75,7 @@ This project uses **publicly available banking documents**, such as:
 │   └── chatbot_interface.py # Streamlit or API interface
 ├── notebooks
 │   └── Exploratory_Testing.ipynb
-├── README.md
+├── readme.md
 ├── requirements.txt
 └── LICENSE
 ```
@@ -132,6 +132,5 @@ Contributions are welcome. To contribute:
 This project is licensed under the MIT License. See LICENSE for details.
 
 ## 9. Project Origin
-This project was inspired by:
 
-Real-world applications of Generative AI in banking
+This project was inspired by Real-world applications of Generative AI in banking
