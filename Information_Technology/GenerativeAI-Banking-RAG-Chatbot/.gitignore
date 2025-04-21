@@ -1,1 +1,28 @@
+# VS Code
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.log
+*.sqlite
+.env
+.venv/
 Lang/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Hugging Face cache (if manually used inside repo)
+*.bin
+*.pt
+
+# macOS
+.DS_Store
+
+# Chroma DB
+db/chroma/
+
+# Model folders (if downloaded manually)
+models/
