@@ -1,36 +1,25 @@
-from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from typing import List
+import fitz  # PyMuPDF
+import pytesseract
+from PIL import Image
+import io
 
-def load_and_split_pdf(
-    pdf_path: str,
-    chunk_size: int = 500,
-    chunk_overlap: int = 50
-) -> List:
-    """
-    Loads a PDF file and splits its content into text chunks.
+def ocr_pdf_to_text_chunks(pdf_path, chunk_size=500, overlap=50):
+    doc = fitz.open(pdf_path)
+    all_text = []
 
-    Args:
-        pdf_path (str): Full or relative path to the PDF file.
-        chunk_size (int): Number of characters per chunk.
-        chunk_overlap (int): Number of overlapping characters between chunks.
+    for page in doc:
+        pix = page.get_pixmap(dpi=300)
+        img = Image.open(io.BytesIO(pix.tobytes()))
+        text = pytesseract.image_to_string(img)
+        all_text.append(text)
 
-    Returns:
-        List[Document]: List of text chunks (LangChain Document objects).
-    """
-    try:
-        loader = PyPDFLoader(pdf_path)
-        pages = loader.load()
+    full_text = " ".join(all_text)
+    
+    # Dividir en chunks
+    chunks = []
+    for i in range(0, len(full_text), chunk_size - overlap):
+        chunk = full_text[i:i+chunk_size]
+        chunks.append(chunk)
 
-        splitter = RecursiveCharacterTextSplitter(
-            chunk_size=chunk_size,
-            chunk_overlap=chunk_overlap
-        )
-
-        chunks = splitter.split_documents(pages)
-        print(f"✅ Loaded {len(pages)} pages and split into {len(chunks)} chunks.")
-        return chunks
-
-    except Exception as e:
-        print(f"❌ Error loading or splitting PDF: {e}")
-        return []
+    print(f"✅ OCR extraído y dividido en {len(chunks)} chunks")
+    return chunks

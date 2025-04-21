@@ -3,7 +3,7 @@ from langchain.prompts import PromptTemplate
 from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceEmbeddings
 from transformers import AutoTokenizer, pipeline
-from langchain import HuggingFacePipeline
+from langchain_huggingface import HuggingFacePipeline
 from src.prompts import get_prompt_template
 
 
@@ -32,11 +32,10 @@ def build_rag_chain(
         # Load language model
         tokenizer = AutoTokenizer.from_pretrained(model_id)
         generator = pipeline(
-            "text-generation",
-            model=model_id,
-            tokenizer=tokenizer,
-            trust_remote_code=True,
-            device_map="auto"
+        "text2text-generation",
+        model=model_id,
+        tokenizer=tokenizer,
+        device=-1  # CPU
         )
 
         llm = HuggingFacePipeline(pipeline=generator)
@@ -49,11 +48,11 @@ def build_rag_chain(
 
         # Build RAG chain
         qa_chain = RetrievalQA.from_chain_type(
-            llm=llm,
-            retriever=vectordb.as_retriever(),
-            chain_type="stuff",
-            chain_type_kwargs={"prompt": prompt},
-            return_source_documents=False
+        llm=llm,
+        retriever=vectordb.as_retriever(),
+        chain_type="stuff",
+        chain_type_kwargs={"prompt": prompt},
+        return_source_documents=False
         )
 
         print("✅ RAG chain with custom prompt ready")

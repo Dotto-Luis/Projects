@@ -1,10 +1,12 @@
 from sentence_transformers import SentenceTransformer
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-# Embedding models
+# Embedding model
 SentenceTransformer('all-MiniLM-L6-v2')
 
-# Language models
-model_id = "stabilityai/stablelm-tuned-alpha-3b"
+# Language model (compatible con CPU)
+model_id = "google/flan-t5-base"
 AutoTokenizer.from_pretrained(model_id)
-AutoModelForCausalLM.from_pretrained(model_id)
+AutoModelForSeq2SeqLM.from_pretrained(model_id)
+
+print("✅ Modelos descargados correctamente.")
