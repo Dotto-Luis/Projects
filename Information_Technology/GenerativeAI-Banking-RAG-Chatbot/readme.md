@@ -64,6 +64,8 @@ This project uses **publicly available banking documents**, such as:
 ```console
 ├── data
 │   └── Spain_unicaja_Fixed_Mortage.pdf
+├── scripts
+│   └── models.py
 ├── images
 │   └── cover.png
 ├── src
