@@ -1,6 +1,6 @@
 # GenerativeAI-Banking-RAG-Chatbot
 
-![image](https://raw.githubusercontent.com/Dotto-Luis/Projects/refs/heads/main/Information_Technology/HuggingFace-LangChain-Chatbot/images/cover.png)
+![image](https://github.com/Dotto-Luis/Projects/blob/main/Information_Technology/GenerativeAI-Banking-RAG-Chatbot/images/cover.png)
 
 ## Table of Contents
 
