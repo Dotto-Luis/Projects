@@ -1,6 +1,6 @@
 # OpenAI-Agent-Toolkit
 
-![Cover](assets/cover.png)
+![Cover](https://github.com/Dotto-Luis/Projects/blob/main/Information_Technology/OpenAI-Agent-Toolkit/assets/OpenAI-Agent-Toolkit.png?raw=true)
 
 ## Table of Contents
 
