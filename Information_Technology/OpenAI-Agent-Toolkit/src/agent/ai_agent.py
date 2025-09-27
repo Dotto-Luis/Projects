@@ -7,24 +7,22 @@ def ai_agent(user_query, df):
     data_context = create_data_summary(df)
 
     prompt = f"""
-You are a data expert AI agent.
+You are a data analyst AI.
 
-You have been provided with this dataset summary:
+Dataset summary:
 {data_context}
 
-Now, based on the user's question:
-'{user_query}'
+Answer this question:
+{user_query}
 
-Think step-by-step. Assume you can access and analyze the dataset like a Data Scientist would using Pandas.
-
-Give a clear, final answer.
+Give only the final answer — no code, no explanations.
     """
 
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.2,
-        max_tokens=500
+        temperature=0,
+        max_tokens=300
     )
 
     return response.choices[0].message.content

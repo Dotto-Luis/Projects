@@ -1,0 +1,38 @@
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Environment variables and secrets
+.env
+
+# macOS system files
+.DS_Store
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Log files
+*.log
+
+# Test output
+htmlcov/
+coverage.xml
+.cache/
+.pytest_cache/
+
+# VS Code settings
+.vscode/
+
+# Large or exported files
+*.parquet
+*.h5
+*.pkl
+*.joblib
