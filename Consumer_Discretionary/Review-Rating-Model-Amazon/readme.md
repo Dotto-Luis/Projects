@@ -25,8 +25,10 @@ The analytical workflow includes:
 
 | Visualization | Description |
 |----------------|-------------|
-| ![chart](images/confusion_matrix.png) | Model confusion matrix showing clear separation for positive classes. |
-| ![chart](images/wordclouds.png) | Word frequency contrast between positive and negative reviews. |
+| ![chart1](https://github.com/Dotto-Luis/Projects/blob/main/Consumer_Discretionary/Review-Rating-Model-Amazon/images/Results_Confusion_Matrix.png?raw=true) | Model confusion matrix showing clear separation for positive classes. |
+| ![chart](https://github.com/Dotto-Luis/Projects/blob/main/Consumer_Discretionary/Review-Rating-Model-Amazon/images/Results_Top_great.png?raw=true) | Word frequency contrast - positive reviews. |
+| ![chart](https://github.com/Dotto-Luis/Projects/blob/main/Consumer_Discretionary/Review-Rating-Model-Amazon/images/Results_Top_bad.png?raw=true) | Word frequency contrast - negative reviews. |
+
 
 ## 4. Tech Stack
 Python · Pandas · Scikit-learn · spaCy · Matplotlib · Seaborn · Jupyter
