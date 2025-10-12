@@ -1,6 +1,6 @@
 # 🧠 Machine Learning & Data Science Projects  
 
-Organized according to **The Global Industry Classification Standard** ([GICS - MSCI](https://www.msci.com/our-solutions/indexes/gics))  
+Organized according to **The Global Industry Classification Standard** ([GICS - MSCI](https://www.msci.com/documents/1296102/11185224/870x200px-GICS-PageBanner_U.gif/bf857596-f018-125a-c784-37f17c359d57?t=1573145399828))  
 
 <p align="center">
   <img src="https://www.msci.com/documents/1296102/11185224/870x200px-GICS-PageBanner_U.gif/bf857596-f018-125a-c784-37f17c359d57?t=1573145399828" alt="GICS Banner" width="600"/>
@@ -56,5 +56,13 @@ Expanding coverage to remaining **GICS sectors** through applied AI and analytic
 - 🥫 **Consumer Staples** — *Retail Demand Forecasting* (Next)
 - 💡 **Utilities** — *Energy Load Optimization* (Next)
 - ⚙️ **Materials** — *Commodity Price Prediction* (Next)
+
+---
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Dotto-Luis/Dotto-Luis/main/signature.png" width="300" alt="Signature Luis Dotto"/>
+  <br>
+  <i>Curated and developed by <b>Luis Dotto</b> — Data Science, AI & Real Estate Analytics</i>
+</p>
 
 
