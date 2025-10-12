@@ -1,0 +1,48 @@
+# 🧠 Python & Jupyter Projects - .gitignore
+
+# --- Virtual environments ---
+venv/
+env/
+.venv/
+.env/
+**/rrm*/
+
+# --- Python cache ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.db
+
+# --- Jupyter checkpoints ---
+.ipynb_checkpoints/
+
+# --- Logs & temporary files ---
+*.log
+*.tmp
+*.swp
+*.bak
+
+# --- Datasets ---
+datasets/*.json
+datasets/*.csv
+datasets/*.tsv
+datasets/*.gz
+datasets/*.zip
+# But keep small samples
+!datasets/sample_*
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- Output artifacts ---
+outputs/
+models/
+experiments/

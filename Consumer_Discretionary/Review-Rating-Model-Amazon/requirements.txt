@@ -1,7 +1,6 @@
-- Jupyter==1.0.0
-- matplotlib==3.6.2
-- pandas==1.5.2
-- seaborn==0.11.2
-- scikit-learn==1.2.1
-- nltk==3.8.1
-- re =2023.8.8
+jupyter==1.0.0
+matplotlib==3.9.2
+pandas==2.2.3
+seaborn==0.13.2
+scikit-learn==1.5.2
+spacy==3.7.5
