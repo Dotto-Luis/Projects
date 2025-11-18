@@ -25,27 +25,49 @@ class ChatAssistant:
         history_length : int, optional
             The length of the conversation history to be stored in memory. Default is 3.
         """
-        # TODO: Create a string template for the chat assistant. It must indicate the LLM
-        # that a chat history is being provided and that a new question is being asked.
-        # The template must have two input variables: `history` and `human_input`.
-        
-        
+        # String template for the chat assistant.
 
-        # TODO: Create a prompt template using the string template created above.
-        # Hint: Use the `langchain.prompts.PromptTemplate` class.
-        # Hint: Don't forget to add the input variables: `history` and `human_input`.
-        self.prompt = 
+        template = (
+            "I'm here to help you with your dream job!\n"
+            "I will verify all the messages to find the right match for you.\n"
+            "Use the history for context when generating your response.\n\n"
+            "Conversation history:\n"
+            "{history}\n\n"
+            "User: {human_input}\n"
+            "Assistant:"
+        )        
 
-        # TODO: Create an instance of an LLM using the `get_llm` factory function with the appropriate settings.
-        # Remember some settings are being provided in the __init__ function for this class.
-        # Hint: You need to pass `model`, `api_key`, `temperature`, and `provider` parameters.
-        self.llm = 
+        # Prompt template using the string template created above.
+        self.prompt = PromptTemplate(
+            template=template,
+            input_variables=["history", "human_input"],
+        )
 
-        # TODO: Create an instance of `langchain.chains.LLMChain` with the appropriate settings.
-        # This chain must combine our prompt, llm and also have a memory.
-        # Hint: You can use the `langchain.memory.ConversationBufferWindowMemory` class with
-        # `k=history_length``.
-        self.model = 
+        # Instance of an LLM using the `get_llm`.
+
+        self.llm = get_llm(
+            model=llm_model,
+            api_key=api_key,
+            temperature=temperature,
+            provider=settings.LLM_PROVIDER,
+        )
+
+
+        # Instance of `langchain.chains.LLMChain` and memory.
+        memory = ConversationBufferWindowMemory(
+            k=history_length,
+            memory_key="history",
+            input_key="human_input",
+            return_messages=False,
+        )
+
+        self.model = LLMChain(
+            llm=self.llm,
+            prompt=self.prompt,
+            memory=memory,
+            verbose=settings.LANGCHAIN_VERBOSE,
+        )
+
 
     def predict(self, human_input: str) -> str:
         """

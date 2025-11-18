@@ -36,6 +36,20 @@ def extract_text_from_pdf(pdf_bytes: BytesIO) -> str:
     """
     pdf_text = ""
 
-    # TODO: Use PyPDF2.PdfReader to open the input `pdf_bytes` and extract the text from each page appended to `pdf_text`.
-    # Hint: Use the `extract_text()` method of the `PyPDF2.PdfReader` object.
+    if pdf_bytes is None:
+        raise ValueError("Invalid PDF bytes provided. Please check!")
+
+    try:
+        reader = PyPDF2.PdfReader(pdf_bytes)
+
+        for page in reader.pages:
+            page_text = page.extract_text() or ""
+            pdf_text += page_text + "\n"
+
+    except Exception as e:
+        raise ValueError(f"Failed to read PDF: {e}")
+
+    return pdf_text.strip()
+
+
 
