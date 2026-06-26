@@ -28,7 +28,41 @@ In this project, I will work exclusively with two files: `movies_review_train_aa
 
 This is a dataset for **binary sentiment classification**.
 
-## 3. Usage Examples (wip)
+## 3. Usage Examples
+
+Run the full notebook end-to-end:
+
+```bash
+jupyter notebook SentimentClassifier-MovieReviews.ipynb
+```
+
+Or use the `src` modules directly:
+
+```python
+from src.extract import load_data
+from src.transform import preprocess_text
+from sklearn.linear_model import LogisticRegression
+
+# Load data
+train_df = load_data("datasets/movies_review_train_aai.csv")
+
+# Preprocess — tokenize, remove stopwords, stem/lemmatize
+train_df["clean_text"] = train_df["review"].apply(preprocess_text)
+
+# Train classifier
+model = LogisticRegression()
+model.fit(X_train_tfidf, train_df["label"])
+```
+
+Example prediction:
+
+```python
+review = "An absolute masterpiece. The storytelling was breathtaking."
+# → positive
+
+review = "Complete waste of time. Terrible acting and boring plot."
+# → negative
+```
 
 ## 4. Project Structure
 <details>

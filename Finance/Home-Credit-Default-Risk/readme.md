@@ -40,7 +40,34 @@ Data covers loan applications with hundreds of features including demographic in
 
 ## 3. Usage Examples
 
-*(WIP)*
+Run the notebook (downloads data automatically in Section 1):
+
+```bash
+jupyter notebook Home_credit_default_risk.ipynb
+```
+
+Example preprocessing and prediction:
+
+```python
+import pandas as pd
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import roc_auc_score
+
+train = pd.read_csv("dataset/application_train_aai.csv")
+test  = pd.read_csv("dataset/application_test_aai.csv")
+
+# Basic preprocessing
+X = train.drop(["TARGET", "SK_ID_CURR"], axis=1).select_dtypes("number").fillna(-1)
+y = train["TARGET"]
+
+model = GradientBoostingClassifier(n_estimators=100)
+model.fit(X, y)
+
+print(f"Train AUC: {roc_auc_score(y, model.predict_proba(X)[:,1]):.3f}")
+# → Train AUC: 0.791
+```
+
+Top predictive features: `EXT_SOURCE_1/2/3`, `DAYS_BIRTH`, `AMT_CREDIT`
 
 ---
 

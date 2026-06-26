@@ -45,15 +45,32 @@ This project uses **publicly available banking documents**, such as:
 
 ---
 
-## 3. Usage Examples (WIP)
+## 3. Usage Examples
 
-### 🧠 Example Question:  
-**"What are the requirements to open a commission-free account?"**
+Run the chatbot:
 
-### ⚙️ Example Model Response (StableLM + RAG):  
+```bash
+pip install -r requirements.txt
+python app/chatbot_interface.py
+```
+
+### Example Question
+
+**”What are the requirements to open a commission-free account?”**
+
+### Example Model Response (StableLM + RAG)
+
 > “To avoid commissions, the customer must direct deposit income and meet basic requirements such as maintaining a monthly average balance.”
 
-*The model retrieves relevant document chunks and generates a human-like response.*
+*The model retrieves relevant document chunks from the PDF and generates a human-like response.*
+
+Ask other questions like:
+
+```
+“What fees apply to international transfers?”
+“What documents do I need to open a savings account?”
+“What is the interest rate on fixed-term deposits?”
+```
 
 ---
 

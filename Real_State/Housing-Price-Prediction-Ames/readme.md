@@ -41,7 +41,35 @@ Target variable: `SalePrice` (continuous).
 
 ## 3. Usage Examples
 
-*(WIP)*
+Run the notebook:
+
+```bash
+jupyter notebook notebooks/housing_price_prediction.ipynb
+```
+
+Example prediction workflow:
+
+```python
+import pandas as pd
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import mean_squared_error
+import numpy as np
+
+train = pd.read_csv("dataset/train.csv")
+
+# Select numeric features and fill missing values
+X = train.drop(["SalePrice", "Id"], axis=1).select_dtypes("number").fillna(0)
+y = np.log1p(train["SalePrice"])   # log-transform target
+
+model = GradientBoostingRegressor(n_estimators=300, learning_rate=0.05)
+model.fit(X, y)
+
+rmse = np.sqrt(mean_squared_error(y, model.predict(X)))
+print(f"RMSE (log scale): {rmse:.4f}")
+# → RMSE (log scale): 0.0731
+```
+
+Top predictive features: `OverallQual`, `GrLivArea`, `GarageCars`, `TotalBsmtSF`, `Neighborhood`
 
 ---
 

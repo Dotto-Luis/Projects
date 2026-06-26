@@ -45,17 +45,32 @@ The agent interacts with mock or real tools/APIs to fulfill the tasks.
 
 ---
 
-## 3. Usage Examples (WIP)
+## 3. Usage Examples
 
-### 🧠 Example Goal:
+Run the agent with a goal:
+
+```bash
+pip install -r requirements.txt
+python main.py --goal "Research the top 3 Python libraries for data visualization and explain their pros and cons."
+```
+
+### Example Goal
 
 **"Research the top 3 Python libraries for data visualization and explain their pros and cons."**
 
-### ⚙️ Example Agent Output:
+### Example Agent Output
 
 > "After researching, here are the top 3 libraries: 1. Matplotlib (most flexible, but verbose), 2. Seaborn (simplifies statistical plotting), 3. Plotly (interactive, great for dashboards)."
 
 The agent completed this via web search, summarization, and multi-step reasoning.
+
+Other example goals you can try:
+
+```
+"Find the 3 most recent AI papers on arXiv and summarize them."
+"Generate a 3-day travel itinerary for Tokyo."
+"Get the weather forecast for Buenos Aires and suggest a suitable outfit."
+```
 
 ---
 

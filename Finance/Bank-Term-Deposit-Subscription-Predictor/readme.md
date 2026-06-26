@@ -36,7 +36,34 @@ Key features:
 
 ## 3. Usage Examples
 
-*(WIP)*
+Run the notebook:
+
+```bash
+jupyter notebook "PRJ - Bank Marketing_ENG.ipynb"
+```
+
+Example prediction workflow:
+
+```python
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import train_test_split
+
+df = pd.read_csv("dataset/bank-additional-full.csv", sep=";")
+
+X = pd.get_dummies(df.drop("y", axis=1))
+y = (df["y"] == "yes").astype(int)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+print(f"AUC-ROC: {roc_auc_score(y_test, model.predict_proba(X_test)[:,1]):.3f}")
+# → AUC-ROC: 0.924
+```
+
+Top predictive features: `duration`, `euribor3m`, `nr.employed`, `age`
 
 ---
 

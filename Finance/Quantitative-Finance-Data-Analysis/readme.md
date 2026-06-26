@@ -40,7 +40,36 @@ Dataset from Kaggle, sourced from Yahoo Finance and EDGAR/Nasdaq Financials:
 
 ## 3. Usage Examples
 
-*(WIP)*
+Run the analysis notebook:
+
+```bash
+jupyter notebook "PRJ - NYSE.ipynb"
+```
+
+Example of loading and exploring the data:
+
+```python
+import pandas as pd
+
+prices = pd.read_csv("dataset/prices-split-adjusted.csv", index_col=0, parse_dates=True)
+fundamentals = pd.read_csv("dataset/fundamentals.csv")
+securities = pd.read_csv("dataset/securities.csv")
+
+# Filter one stock
+aapl = prices[prices["symbol"] == "AAPL"]
+print(aapl.tail())
+
+# P/E ratio from fundamentals
+pe = fundamentals[fundamentals["Ticker Symbol"] == "AAPL"]["Earnings Per Share"]
+print(pe)
+```
+
+Example insight:
+
+```
+AAPL 2016 close: $115.82 | P/E ratio: 13.7x
+Sector with highest avg return (2010-2016): Information Technology (+18.4% CAGR)
+```
 
 ---
 

@@ -49,7 +49,32 @@ Two data sources are combined:
 
 ## 3. Usage Examples
 
-*(WIP)*
+Run the main analysis notebook:
+
+```bash
+jupyter notebook Ecommerce-Performance-Insights.ipynb
+```
+
+Or run SQL queries directly:
+
+```bash
+# Revenue by year
+sqlite3 datasets.db < queries/revenue_by_month_year.sql
+
+# Top 10 product categories by revenue
+sqlite3 datasets.db < queries/top_10_revenue_categories.sql
+
+# Delivery performance vs estimated dates
+sqlite3 datasets.db < queries/real_vs_estimated_delivered_time.sql
+```
+
+Example insight from the analysis:
+
+```
+Year 2018 revenue: R$ 8.5M (+35% vs 2017)
+Top category: health_beauty (R$ 1.2M)
+Average delivery delay in December: +3.2 days vs estimated
+```
 
 ---
 

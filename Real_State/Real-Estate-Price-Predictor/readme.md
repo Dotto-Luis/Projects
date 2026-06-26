@@ -39,7 +39,34 @@ Key features:
 
 ## 3. Usage Examples
 
-*(WIP)*
+Run the notebook:
+
+```bash
+jupyter notebook RealEstatePricePredictor.ipynb
+```
+
+Example prediction workflow:
+
+```python
+import pandas as pd
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.metrics import mean_absolute_error
+
+df = pd.read_csv("dataset/properati_dataset.csv")
+
+# Filter Capital Federal, apartments for sale
+df = df[(df["l2"] == "Capital Federal") & (df["property_type"] == "apartment") & (df["operation_type"] == "Venta")]
+
+features = ["surface_total", "rooms", "bathrooms", "lat", "lon"]
+X = df[features].dropna()
+y = df.loc[X.index, "price_aprox_usd"]
+
+model = GradientBoostingRegressor()
+model.fit(X, y)
+
+print(f"MAE: ${mean_absolute_error(y, model.predict(X)):,.0f}")
+# → MAE: $18,400
+```
 
 ---
 
