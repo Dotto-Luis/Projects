@@ -1,0 +1,18 @@
+experiment_id,stage,model,features,hyperparameters,local_score,leaderboard_score,notes,date
+v1_local,model_training,RandomForest,baseline,n_estimators=200,0.08,NA,first pipeline local baseline,2026-03-10
+v1_submission,submission,RandomForest,baseline,n_estimators=200,0.08,-0.01,first submission attempt,2026-03-10
+
+v4_local,model_training,RandomForest,spectral_ratios,n_estimators=500,0.12,NA,strong baseline local model,2026-03-11
+v4_submission,submission,RandomForest,spectral_ratios,n_estimators=500,0.12,0.2939,strong baseline leaderboard result,2026-03-11
+
+v5_local,model_training,RandomForest,geo_knn,n_estimators=700,0.09,NA,geospatial feature attempt,2026-03-11
+v5_submission,submission,RandomForest,geo_knn,n_estimators=700,0.09,0.195,geospatial model submission,2026-03-11
+
+v7_local,model_training,RandomForest,physical_features,"n_estimators=1500,max_depth=14",0.14,NA,new spectral/physical feature set,2026-03-12
+v7_submission,submission,RandomForest,physical_features,"n_estimators=1500,max_depth=14",0.14,0.31,improved submission better than v5,2026-03-12
+
+
+rf_groupkfold_v1,model_validation,RandomForest,physical_features,n_estimators=200,0.149,NA,GroupKFold validation,2026-03-12
+
+rf_groupkfold_spatial_v1,model_validation,RandomForest,physical+spatial_lag,n_estimators=200,0.2151,NA,GroupKFold spatial validation,2026-03-12
+

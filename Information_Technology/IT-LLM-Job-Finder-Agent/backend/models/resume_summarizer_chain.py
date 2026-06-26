@@ -4,25 +4,36 @@ from langchain.prompts import PromptTemplate
 from backend.config import settings
 from backend.llm_factory import get_llm
 
-# TODO: Create a string template for this chain. It must indicate the LLM
+# Template for this chain. It must indicate the LLM
 # that a resume is being provided to be summarized to extract the candidates skills.
 # The template must have one input variables: `resume`.
-template = """
-"""
-
+template = (
+    "Act as the best expert technical recruiter in the world. "
+    "You will receive a candidate's resume as an input and your task is to summarize it, "
+    "focusing on their main skills, technologies, tools, and relevant experience.\n\n"
+    "Resume:\n{resume}\n\n"
+    "Summarized skills and profile:"
+)
 
 def get_resume_summarizer_chain():
-    # TODO: Create a prompt template using the string template created above.
-    # Hint: Use the `langchain.prompts.PromptTemplate` class.
-    # Hint: Don't forget to add the input variables: `resume`.
+    #Pompt template using the string template created above.
+    prompt = PromptTemplate(
+    input_variables=["resume"],
+    template=template,
+    )
 
+    # LLM with temperature and provider
+    llm = get_llm(
+        temperature=0,
+        provider=settings.LLM_PROVIDER,
+    )
 
-    # TODO: Create an instance of an LLM using the `get_llm` factory function with the appropriate settings.
-    # Hint: You need to pass `temperature` and `provider` parameters.
-
-
-    # TODO: Create an instance of `langchain.chains.LLMChain` with the appropriate settings.
-    # This chain must combine our prompt and an llm. It doesn't need a memory.
+    # LLMChain without memory
+    resume_summarizer_chain = LLMChain(
+        llm=llm,
+        prompt=prompt,
+        verbose=settings.LANGCHAIN_VERBOSE,
+    )
 
     return resume_summarizer_chain
 

@@ -1,0 +1,44 @@
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ===== Virtual environments =====
+venv/
+env/
+.venv/
+Bank/
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+
+# ===== Data (evitar subir datasets pesados) =====
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# ===== Models =====
+models/*
+!models/.gitkeep
+
+# ===== Logs =====
+*.log
+
+# ===== OS files =====
+.DS_Store
+Thumbs.db
+
+# ===== IDEs =====
+.vscode/
+.idea/
+
+# ===== Matplotlib cache =====
+.matplotlib/
+
+# ===== Env variables =====
+.env
+
+# ===== Optional (notebooks pesados) =====
+*.nbconvert.ipynb

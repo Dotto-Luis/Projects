@@ -1,148 +1,139 @@
-#  LLM-Powered Apps Final Project
+# IT LLM Job Finder Agent #AIAgents
 
-## The Business problem
+![Cover](https://github.com/Dotto-Luis/Projects/blob/main/Information_Technology/IT-LLM-Job-Finder-Agent/assets/cover.png?raw=true)
 
-This project is related to LLMs. You want to create an app that is able to take a person's profile and look for job oportunities that would match it.
+## Table of Contents
 
-## About the data
+1. [Business Goal](#business-goal)
+2. [About the Data](#about-the-data)
+3. [Usage Examples](#usage-examples)
+4. [Project Structure](#project-structure)
+5. [Requirements](#requirements)
+6. [Tests](#tests)
+7. [Contributing](#contributing)
+8. [License](#license)
+9. [Project Origin](#project-origin)
 
-In this project, we will work exclusively with a file `jobs.csv`.
+---
 
-You don't have to worry about downloading the data, it is already present in the dataset folder.
+## 1. Business Goal
 
-This is a dataset for **creating a job-searching app**.
+This project builds an LLM-powered job-matching agent that takes a candidate's profile (resume) and automatically finds job opportunities that match their skills, experience, and preferences.
 
-## Technical aspects
+The system uses:
+- **RAG (Retrieval-Augmented Generation)** to search a job database semantically.
+- **LangChain** for chaining LLM calls (resume summarizer → job finder → cover letter writer).
+- **ChromaDB** for vector storage of job embeddings.
+- **Chainlit** for an interactive chat interface.
+- Supports **OpenAI** and **Google Gemini** as LLM providers.
 
-To develop this Machine Learning model you can use the README.md. This file will guide you through all the steps you have to follow and the code you have to complete in the different parts of the project, also marked with a `TODO` comment.
+---
 
-## Install
+## 2. About the Data
 
-A `requirements.txt` file is provided with all the needed Python libraries for running this project. For installing the dependencies just run:
+The project uses `dataset/jobs.csv` — a CSV file containing job listings with fields such as title, company, description, requirements, and location. The ETL pipeline processes this file into a ChromaDB vector database for semantic job search.
+
+---
+
+## 3. Usage Examples
+
+**1. Configure your LLM provider in `.env`:**
+
 ```bash
-$ pip install -r requirements.txt
-```
-
-*Note:* We encourage you to install those inside a virtual environment.
-
-## Configuration
-
-This project supports both OpenAI and Google Gemini as LLM providers. Configure your preferred provider in the `.env` file:
-```bash
-# Choose provider: "openai" or "gemini"
-LLM_PROVIDER="openai"
-
-# OpenAI settings
+LLM_PROVIDER="openai"             # or "gemini"
+OPENAI_API_KEY="your-key-here"
 OPENAI_LLM_MODEL="gpt-4o-mini"
-OPENAI_API_KEY="your-openai-api-key-here"
-
-# Gemini settings
-GEMINI_LLM_MODEL="gemini-2.5-flash"
-GOOGLE_API_KEY="your-google-api-key-here"
-
-LANGCHAIN_VERBOSE=true
 ```
 
-You can switch between providers by changing the `LLM_PROVIDER` value in your `.env` file.
+**2. Run the ETL pipeline (build vector DB):**
 
-## Run Project
-
-To run the ETL pipeline and create a chroma vector database once you finish completing the code, run:
 ```bash
-$ python backend/etl.py
+python backend/etl.py
 ```
 
-## Run Project
+**3. Launch the Chainlit chat interface:**
 
-In order to execute the project you need to launch a Chainlit server running:
 ```bash
-$ python -m chainlit run -w backend/app.py
+python -m chainlit run -w backend/app.py
 ```
 
-## Code Style
+Then upload your resume and ask: *"Find me jobs that match my profile."*
 
-Following a style guide keeps the code's aesthetics clean and improves readability, making contributions and code reviews easier. Automated Python code formatters make sure your codebase stays in a consistent style without any manual work on your end. If adhering to a specific style of coding is important to you, employing an automated to do that job is the obvious thing to do. This avoids bike-shedding on nitpicks during code reviews, saving you an enormous amount of time overall.
+---
 
-We use [Black](https://black.readthedocs.io/) for automated code formatting in this project, you can run it with:
+## 4. Project Structure
+
+<details>
+  <summary>📂 Expand for Project Structure</summary>
+
 ```console
-$ black --line-length=88 .
+├── backend/
+│   ├── app.py                        # Chainlit app entry point
+│   ├── etl.py                        # ETL pipeline: CSV → ChromaDB
+│   ├── llm_factory.py                # LLM provider factory (OpenAI/Gemini)
+│   ├── utils.py                      # PDF text extraction utilities
+│   └── models/
+│       ├── chatgpt_clone.py          # General chat assistant
+│       ├── jobs_finder.py            # Job matching assistant
+│       ├── jobs_finder_agent.py      # Cover letter writer agent
+│       └── resume_summarizer_chain.py
+├── dataset/
+│   └── jobs.csv
+├── chroma/                           # ChromaDB vector store
+├── tests/
+│   ├── test_utils.py
+│   ├── test_chatgpt_clone.py
+│   └── test_job_finder_agent.py
+├── .env.example
+├── requirements.txt
+└── README.md
 ```
+</details>
 
-Wanna read more about Python code style and good practices? Please see:
-- [The Hitchhiker's Guide to Python: Code Style](https://docs.python-guide.org/writing/style/)
-- [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
+---
 
-## Tests
+## 5. Requirements
 
-We've added some basic tests for the backend service:
-
-- test_utils.py for utils.py.
-- test_chatgpt_clone.py for chatgpt_clone.py.
-- test_job_finder_agent.py for job_finder_agent.py.
-
-To run just execute:
 ```bash
-$ python -m pytest tests
+pip install -r requirements.txt
 ```
 
-If you want to learn more about testing Python code, please read:
-- [Effective Python Testing With Pytest](https://realpython.com/pytest-python-testing/)
-- [The Hitchhiker's Guide to Python: Testing Your Code](https://docs.python-guide.org/writing/tests/)
+Key dependencies:
+- langchain · openai · google-generativeai
+- chromadb · chainlit
+- pandas · PyPDF2
+- black (code formatting)
 
+---
 
-## Structure to be completed
+## 6. Tests
 
-WEEK 1:
+```bash
+python -m pytest tests
+```
 
-DAY 1:
+Tests cover: utilities, chat assistant, and job finder agent modules.
 
-- Get all the requirements installed in a virtual env and the chainlit app running.
-- Complete the function extract_text_from_pdf() at backend/utils.py.
-    - Use PyPDF2.PdfReader to open the input `pdf_bytes` and extract the text from each page appended to `pdf_text`.
+---
 
-DAY 2:
+## 7. Contributing
 
-- Complete the code for the class ChatAssistant() at backend/models/chatgpt_clone.py:
-    - Create a string template for the chat assistant.
-    - Create a prompt template using the string template created above.
-    - Create an instance of an LLM using the `get_llm` factory function with the appropriate settings.
-    - Create an instance of `langchain.chains.LLMChain` with the appropriate settings.
+Contributions are welcome. To contribute:
 
-WEEK 2:
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a Pull Request.
 
-DAY 1:
+---
 
-- Complete the code for the ETLProcessor() class at backend/etl.py.
-    - Create a text splitter using the `langchain.text_splitter.RecursiveCharacterTextSplitter` class.
-    - Load the dataset from the `dataset_path` using the `pandas.read_csv()` function.
-- Run ingestion/etl.py to create the initial dataset with vector embeddings.
+## 8. License
 
-DAY 2:
+This project is licensed under the MIT License.
 
-- Complete the code for the JobsFinderAssistant() class at backend/models/jobs_finder.py.
-    - Create a string template for the chat assistant.
-    - Create a prompt template using the string template created above.
-    - Create an instance of an LLM using the `get_llm` factory function with the appropriate settings.
-    - Create an instance of `langchain.chains.LLMChain` with the appropriate settings.
-    - Use the human input and the user resume summary to search for jobs.
+---
 
-WEEK 3:
+## 9. Project Origin
 
-DAY 1:
-- Complete the missing elements in backend/models/resume_summarizer_chain.py. This creates a summarized resume chain for backend/models/jobs_finder.py.
-    - Create a string template for this chain.
-    - Create a prompt template using the string template created above.
-    - Create an instance of an LLM using the `get_llm` factory function with the appropriate settings.
-    - Create an instance of `langchain.chains.LLMChain` with the appropriate settings.
-
-
-DAY 2:
-- Complete the function build_cover_letter_writing() at backend/models/jobs_finder_agent.py.
-    - Create a string template for this chain.
-    - Create a prompt template using the string template created above.
-    - Create an instance of `langchain.chains.LLMChain` with the appropriate settings.
-- Take the profile + job found and make a personalized message to the recruiter.
-
-## LLM Provider Support
-
-This project uses a factory pattern (`backend/llm_factory.py`) to support multiple LLM providers. The `get_llm()` function automatically selects the appropriate provider based on your `.env` configuration, allowing you to seamlessly switch between OpenAI and Google Gemini without changing your code.
+Final project from an LLM-Powered Apps course by AnyoneAI. Extended with multi-provider support (OpenAI and Google Gemini) via a factory pattern architecture.

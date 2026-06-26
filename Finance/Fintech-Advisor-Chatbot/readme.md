@@ -1,81 +1,109 @@
-# Fintech-Advisor-Chatbot #NLP
- 
+# Fintech Advisor Chatbot #NLP
 
-![finance-chatbot](https://github.com/Dotto-Luis/Projects/assets/93018629/f0e76fac-972a-4505-bbaa-c883bdb9d6cb)
+![Cover](https://github.com/Dotto-Luis/Projects/assets/93018629/f0e76fac-972a-4505-bbaa-c883bdb9d6cb)
 
+## Table of Contents
 
-## Business Goal
+1. [Business Goal](#business-goal)
+2. [About the Data](#about-the-data)
+3. [Usage Examples](#usage-examples)
+4. [Project Structure](#project-structure)
+5. [Requirements](#requirements)
+6. [Tests](#tests)
+7. [Contributing](#contributing)
+8. [License](#license)
+9. [Project Origin](#project-origin)
 
-The main goal of this project is to provide users a platform in which they can interact with a Chatbot assistant and make questions about finance over NASDAQ companies. 
+---
 
-For developing this kind of solution I will need first to extract all the text data from the provided dataset and store them in some platform that will allow you later to perform text searches to retrieve the most similar results from the user question. Then I will need to connect some Generative Models like GPT to take the retrieved text chunks and create a final answer for the user.
+## 1. Business Goal
 
+The goal of this project is to provide users a platform to interact with a chatbot assistant and ask questions about NASDAQ-listed companies using their public financial documents.
 
+The system:
+1. Extracts text from annual reports and 10-K filings.
+2. Stores chunks in a vector database for semantic search.
+3. Connects to a Generative Model (GPT) to retrieve relevant context and generate accurate answers.
 
-## About the data
+---
 
-The provided dataset is a subset of the ones listed on the website www.annualreports.com. More specifically, our dataset is composed of public documents (Annual reports and 10-K statements) from the last 5 years from all the companies listed in the NASDAQ stock market (around 2600 companies).
+## 2. About the Data
 
-The dataset can be found in AWS S3. To access the dataset you will have to use the boto3 library and here are the key and secret keys that you can use for read-only access.
+The dataset is a subset of documents from [annualreports.com](https://www.annualreports.com), composed of public Annual Reports and 10-K statements from the last 5 years across all ~2,600 NASDAQ-listed companies.
 
-- Dataset: s3://anyoneai-datasets/nasdaq_annual_reports/
-- Key: AKIA2JHUK4EGBAMYAYFY
+Dataset location: `s3://anyoneai-datasets/nasdaq_annual_reports/`
 
-## Project Structure
+---
 
-Before starting to work, let's take a deep overview of the project structure and each module inside:
+## 3. Usage Examples
+
+Launch the chatbot UI:
+
+```bash
+docker-compose up --build
+```
+
+Then navigate to `http://localhost` and start asking questions like:
+
+> "What was NVIDIA's revenue growth in 2023?"
+
+> "What are the main risk factors disclosed by Apple?"
+
+---
+
+## 4. Project Structure
+
+<details>
+  <summary>📂 Expand for Project Structure</summary>
 
 ```console
 fchat/
-│
-├── api/                     # Code for the API that interacts with the chatbot
-│   ├── Dockerfile            # Dockerfile for the API
-│   ├── app.py                # Main API code
-│   ├── middleware.py         # Middleware for the API
-│   ├── views.py              # Views or routes for the API
-│   ├── settings.py           # Configuration settings for the API
-│   ├── utils.py              # Utility functions for the API
-│   ├── templates/            # HTML templates for the UI
-│   │   └── index.html        # Main template
-│   └── tests/                # Unit tests for the API
-│       ├── test_api.py       # API tests
-│       └── test_utils.py     # Utility tests
-│
-├── model/                   # Code for the Natural Language Processing (NLP) model
-│   ├── Dockerfile            # Dockerfile for the model
-│   ├── ml_service.py         # Machine learning service code
-│   ├── settings.py           # Configuration settings for the model
-│   └── tests/                # Unit tests for the model
-│       └── test_model.py     # Model tests
-│
-├── data/                    # Data related to the project
-│   ├── raw/                 # Raw data (downloaded from S3)
-│   └── processed/           # Processed data
-│
-├── notebooks/               # Jupyter notebooks for exploratory data analysis (EDA) and prototypes
-│   └── exploratory_analysis.ipynb  # EDA notebook
-│
-├── scripts/                 # Utility scripts for data processing, training, etc.
-│   ├── download_data.py      # Script for downloading data from AWS S3
-│   ├── preprocess_data.py    # Script for preprocessing data
-│   └── other_scripts.py      # Other useful scripts
-│
-├── stress_test/             # Stress tests for the API
-│   └── locustfile.py         # Locust configuration file for load testing
-│
-├── ui/                      # Code for the user interface
-│   ├── Dockerfile            # Dockerfile for the UI
-│   ├── app.py                # Main UI code
-│   └── templates/            # HTML/CSS/JS templates for the UI
-│       └── index.html        # Main UI page
-│
-├── docker-compose.yml       # Docker Compose file for orchestrating containers
-├── README.md                # Project documentation
-└── requirements.txt         # Python dependencies for the project
-
+├── api/                          # Chatbot API
+│   ├── Dockerfile
+│   ├── app.py
+│   ├── middleware.py
+│   ├── views.py
+│   ├── settings.py
+│   ├── utils.py
+│   ├── templates/
+│   │   └── index.html
+│   └── tests/
+│       ├── test_api.py
+│       └── test_utils.py
+├── model/                        # NLP model service
+│   ├── Dockerfile
+│   ├── ml_service.py
+│   ├── settings.py
+│   └── tests/
+│       └── test_model.py
+├── data/
+│   ├── raw/
+│   └── processed/
+├── notebooks/
+│   └── exploratory_analysis.ipynb
+├── scripts/
+│   ├── download_data.py
+│   └── preprocess_data.py
+├── stress_test/
+│   └── locustfile.py
+├── ui/
+│   ├── Dockerfile
+│   ├── app.py
+│   └── templates/
+│       └── index.html
+├── docker-compose.yml
+├── README.md
+└── requirements.txt
 ```
+</details>
 
-## Requirement
+---
+
+## 5. Requirements
+
+```bash
+pip install -r requirements.txt
+```
 
 - black==23.1.0
 - flake8==6.0.0
@@ -89,12 +117,35 @@ fchat/
 - scikit-learn==1.2.1
 - seaborn==0.12.2
 
-```pip install -r requirements.txt```
+---
 
+## 6. Tests
 
-## Project Origin
+```bash
+pytest api/tests/
+pytest model/tests/
+```
 
-This project is based on a [Kaggle](https://www.kaggle.com/competitions/home-credit-default-risk/data) project.
+---
 
-I'd like to thank AnyoneAI for their contribution and inspiration in the development of this project.
+## 7. Contributing
 
+Contributions are welcome. To contribute:
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a Pull Request.
+
+---
+
+## 8. License
+
+This project is licensed under the MIT License.
+
+---
+
+## 9. Project Origin
+
+Inspired by real-world RAG applications in financial services. Thanks to AnyoneAI for their contribution and inspiration.

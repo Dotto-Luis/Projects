@@ -18,21 +18,30 @@ def build_job_finder(job_finder_assistant):
 
 def build_cover_letter_writing(llm, resume):
     def cover_letter_writing(job_description: str):
-        # TODO: Create a string template for this chain. It must indicate the LLM
-        # that a resume and a job description is being provided, it must write a
-        # cover letter for the job description using the applicant skills.
-        # The template must have two input variables: `resume` and `job_description`.
-        
+        # Template to indicate the LLM that a resume and a job description is being provided.
+        template = (
+            "You are the best assisting with the preparation of a tailored cover letter. "
+            "Use the candidate’s resume and the job description to craft a short, clear, and focused letter that emphasizes "
+            "the strengths, experience, and skills that best match the role.\n\n"
+            "Resume:\n{resume}\n\n"
+            "Job description:\n{job_description}\n\n"
+            "Cover letter:"
+        )
 
-        # TODO: Create a prompt template using the string template created above.
-        # Hint: Use the `langchain.prompts.PromptTemplate` class.
-        # Hint: Don't forget to add the input variables: `resume` and `job_description`.
-        prompt = 
-        
+        prompt = PromptTemplate(
+            input_variables=["resume", "job_description"],
+            template=template,
+        )
 
-        # TODO: Create an instance of `langchain.chains.LLMChain` with the appropriate settings.
-        # This chain must combine our prompt and an llm. It doesn't need a memory.
-        cover_letter_writing_chain = 
+        cover_letter_writing_chain = LLMChain(
+            llm=llm,
+            prompt=prompt,
+            verbose=settings.LANGCHAIN_VERBOSE,
+        )
+
+        return cover_letter_writing_chain.invoke(
+            {"resume": resume, "job_description": job_description}
+        )
 
     return cover_letter_writing
 
@@ -61,9 +70,14 @@ class JobsFinderAgent:
 
         self.resume = resume
 
-        # TODO: Create an instance of an LLM using the `get_llm` factory function with the appropriate settings.
-        # Hint: You need to pass `model`, `api_key`, `temperature`, and `provider` parameters.
-        self.llm = 
+        # Instance of an LLM using the `get_llm` factory function with the appropriate settings.
+        self.llm = get_llm(
+            model=llm_model,
+            api_key=api_key,
+            temperature=temperature,
+            provider=settings.LLM_PROVIDER,
+        )
+
 
         # Create the Job finder tool
         self.job_finder = JobsFinderAssistant(

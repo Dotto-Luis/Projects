@@ -41,33 +41,51 @@ class JobsFinderAssistant:
         # Initialize the jobs retriever
         self.retriever = Retriever()
 
-        # TODO: Create a string template for the chat assistant. It must indicate the LLM
-        # that a chat history is being provided and that a new question is being asked
-        # and also there are some articles found on a database for answering the question.
-        # The template must have three input variables: `history`, `search_results` and `human_input`.
-        
-    
+        # Template for the chat assistant. This assistant indicates the LLM that a chat history is being provided,
+        # a new question is being asked and also there are some articles found on a database for answering the question.
+        template = (
+        "You are an AI job search assistant.\n\n"
+        "Inputs:\n"
+        "- Conversation history: {history}\n"
+        "- Relevant job postings: {search_results}\n"
+        "- User question: {human_input}\n\n"
+        "Task:\n"
+        "1) Use the job postings and the conversation history to understand what the user is looking for.\n"
+        "2) Suggest the most relevant roles.\n"
+        "3) Explain briefly why each suggestion is a good fit.\n\n"
+        "Answer:\n"
+        "- Start by summarizing what the user seems to be looking for.\n"
+        "- Then list 2–5 suggested roles from the job postings.\n"
+        "- For each role, add a one-line explanation of the fit.\n"
 
-        # TODO: Create a prompt template using the string template created above.
-        # Hint: Use the `langchain.prompts.PromptTemplate` class.
-        # Hint: Don't forget to add the input variables: `history`, `search_results` and `human_input`.
-        self.prompt =
-        
+        )
 
-        # TODO: Create an instance of an LLM using the `get_llm` factory function with the appropriate settings.
-        # Remember some settings are being provided in the __init__ function for this class.
-        # Hint: You need to pass `model`, `api_key`, `temperature`, and `provider` parameters.
-        self.llm = 
-        
+        # Prompt template using the string template created above.
+        self.prompt = PromptTemplate(
+            input_variables=["history", "search_results", "human_input"],
+            template=template,
+        )
+
+        # Instance of an LLM using the `get_llm` factory function with the appropriate settings.
+        self.llm = get_llm(
+            model=llm_model,
+            api_key=api_key,
+            temperature=temperature,
+            provider=settings.LLM_PROVIDER,
+        )
 
         # Create a memory for the chat assistant.
         _memory = ConversationBufferWindowMemory(
             input_key="human_input", k=history_length
         )
 
-        # TODO: Create an instance of `langchain.chains.LLMChain` with the appropriate settings.
-        # This chain must combine our prompt, llm and also have a memory.
-        self.model = 
+        # Instance of `langchain.chains.LLMChain` with the appropriate settings.
+        self.model = LLMChain(
+            llm=self.llm,
+            prompt=self.prompt,
+            memory=_memory,
+            verbose=settings.LANGCHAIN_VERBOSE,
+        )
         
 
     def predict(self, human_input: str) -> str:
@@ -84,17 +102,15 @@ class JobsFinderAssistant:
         response : str
             The response from the chat assistant.
         """
+        query = (
+            f"Job search query: {human_input}\n\n"
+            f"Candidate profile summary: {self.resume_summary}"
+        )
+        jobs = self.retriever.search(query)
 
-        # TODO: Use the human input and the user resume summary to search for jobs.
-        # Hint 1: Use the `self.retriever` instance.
-        # Hint 2: You can combine the human input with the resume summary just concatenating strings.
-        
-
-        # Call the model to generate a response.
-        # We will pass the original human_input on this step, the resume should
-        # be used only for the retrieval of jobs (`search_results`).
+        # Human input and the user resume summary to search for jobs.
         model_answer = self.model.invoke(
-            {"search_results": jobs, "human_input": human_input}
+        {"search_results": jobs, "human_input": human_input}
         )
 
         return model_answer

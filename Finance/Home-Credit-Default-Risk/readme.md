@@ -1,37 +1,65 @@
-# HomeCreditDefaultRisk-Home Credit #Classification
- 
+# Home Credit Default Risk #Classification
 
-![Project3](https://github.com/Dotto-Luis/Projects/assets/93018629/ee20e50b-0188-4c2e-aa0f-0be02a087333)
+![Cover](https://github.com/Dotto-Luis/Projects/assets/93018629/ee20e50b-0188-4c2e-aa0f-0be02a087333)
 
-## Business Goal
+## Table of Contents
 
-This is a binary Classification task: we want to predict whether the person applying for a home credit will be able to repay their debt or not. Our model will have to predict a 1 indicating the client will have payment difficulties: he/she will have late payment of more than X days on at least one of the first Y installments of the loan in our sample, 0 in all other cases.
+1. [Business Goal](#business-goal)
+2. [About the Data](#about-the-data)
+3. [Usage Examples](#usage-examples)
+4. [Project Structure](#project-structure)
+5. [Requirements](#requirements)
+6. [Tests](#tests)
+7. [Contributing](#contributing)
+8. [License](#license)
+9. [Project Origin](#project-origin)
 
-We will use Area Under the ROC Curve as the evaluation metric, so our models will have to return the probabilities that a loan is not paid for each input data.
+---
 
-## About the data
+## 1. Business Goal
 
-The original dataset is composed of multiple files with different information about loans taken. In this project, we will work exclusively with the primary files: application_train_aai.csv and application_test_aai.csv.
+This is a binary classification task: predict whether a home credit applicant will be able to repay their debt.
 
-You don't have to worry about downloading the data, it will be automatically downloaded from the AnyoneAI - Sprint Project 02.ipynb notebook in Section 1 - Getting the data.
+- `1` — client will have payment difficulties (late payment of more than X days on at least one of the first Y installments).
+- `0` — all other cases.
 
-These data comes from a project in [Kaggle](https://www.kaggle.com/competitions/home-credit-default-risk/overview), and a Home Credit Compay calle [Home Credit](https://www.homecredit.net/)
+Evaluation metric: **Area Under the ROC Curve (AUC-ROC)**, so models must return repayment default probabilities for each applicant.
 
-## Project Structure
+---
 
-Before starting to work, let's take a deep overview of the project structure and each module inside:
+## 2. About the Data
+
+The dataset comes from the [Home Credit Default Risk Kaggle competition](https://www.kaggle.com/competitions/home-credit-default-risk/overview). The primary files used are:
+- `application_train_aai.csv` — training data with labels.
+- `application_test_aai.csv` — test data for prediction.
+- `HomeCredit_columns_description.csv` — feature descriptions.
+
+Data covers loan applications with hundreds of features including demographic info, credit history, and financial behavior.
+
+---
+
+## 3. Usage Examples
+
+*(WIP)*
+
+---
+
+## 4. Project Structure
+
+<details>
+  <summary>📂 Expand for Project Structure</summary>
 
 ```console
-├── dataset
-│   ├── application_test_aai.csv
-│   ├── application_train_aai.csv
-│   ├── HomeCredit_columns_description.csv
-├── src
-│   ├── __init__.py
-│   ├── config.py
-│   ├── data_utils.py
-│   ├── preprocessing.py
-└── tests
+├── dataset/
+│   ├── application_test_aai.csv
+│   ├── application_train_aai.csv
+│   └── HomeCredit_columns_description.csv
+├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── data_utils.py
+│   └── preprocessing.py
+├── tests/
 │   ├── __init__.py
 │   ├── conftest.py
 │   ├── test_data_utils.py
@@ -41,8 +69,15 @@ Before starting to work, let's take a deep overview of the project structure and
 ├── README.md
 └── requirements.txt
 ```
+</details>
 
-## Requirement
+---
+
+## 5. Requirements
+
+```bash
+pip install -r requirements.txt
+```
 
 - black==23.1.0
 - flake8==6.0.0
@@ -56,11 +91,36 @@ Before starting to work, let's take a deep overview of the project structure and
 - scikit-learn==1.2.1
 - seaborn==0.12.2
 
-```pip install -r requirements.txt```
+---
 
+## 6. Tests
 
-## Project Origin
+```bash
+pytest tests/
+```
 
-This project is based on a [Kaggle](https://www.kaggle.com/competitions/home-credit-default-risk/data) project.
+Tests cover data utilities and preprocessing pipeline.
 
-I'd like to thank AnyoneAI for their contribution and inspiration in the development of this project.
+---
+
+## 7. Contributing
+
+Contributions are welcome. To contribute:
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a Pull Request.
+
+---
+
+## 8. License
+
+This project is licensed under the MIT License.
+
+---
+
+## 9. Project Origin
+
+Based on the [Home Credit Default Risk](https://www.kaggle.com/competitions/home-credit-default-risk/data) Kaggle competition. Thanks to AnyoneAI for their contribution and inspiration.

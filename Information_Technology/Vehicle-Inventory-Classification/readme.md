@@ -1,126 +1,131 @@
-# Sprint Project 04
-> Vehicle classification from images
+# Vehicle Inventory Classification #ComputerVision
 
-## The Business problem
+![Cover](https://github.com/Dotto-Luis/Projects/blob/main/Information_Technology/Vehicle-Inventory-Classification/image.png?raw=true)
 
-Imagine a company that has a large inventory of used cars and wants to create a website or a mobile app to make it easier for customers to search and find the exact car they are looking for. One way to improve the user experience would be to allow customers to search for cars by make and model. However, manually entering this information for every car in the inventory could be time-consuming and error-prone.
+## Table of Contents
 
-Using a machine learning model capable of classifying vehicle make and model from images, the company could automatically extract this information from pictures of the cars. This would make it faster and more accurate to input the information, allowing customers to easily search and filter cars by make and model. This would not only improve the customer experience but also save the company time and resources. Additionally, the model could be used to automatically identify and categorize new cars as they come into the inventory.
+1. [Business Goal](#business-goal)
+2. [About the Data](#about-the-data)
+3. [Usage Examples](#usage-examples)
+4. [Project Structure](#project-structure)
+5. [Requirements](#requirements)
+6. [Tests](#tests)
+7. [Contributing](#contributing)
+8. [License](#license)
+9. [Project Origin](#project-origin)
 
-Now, image you are working for that company as a Machine Learning Engineer and are in charge of creating such model. For the initial proof-of-concept, the Data team collected and labelled pictures for 25 different cars. Your task will be to train a model able to classify those vehicles with a high accuracy (over 80% on the testing dataset).
+---
 
-This is a Multi-class Classification task: we want to predict, given a picture of a vehicle, which of the possible 25 classes is the correct vehicle make-model.
+## 1. Business Goal
 
-## About the data
+A used car marketplace wants to automate vehicle identification from photos. Manually entering make and model for every car is time-consuming and error-prone. This project trains a CNN-based multi-class classifier to predict vehicle make and model from images across 25 different classes, targeting >80% accuracy on the test set.
 
-The dataset is composed of JPG images, already stored in folders containing the label (vehicle make-model), separated in train and test sets.
+Use case: auto-populate vehicle attributes when sellers upload car photos.
 
-You don't have to worry about downloading the data, it will be automatically downloaded from the `AnyoneAI - Sprint Project 04.ipynb` notebook in `Section 1 - Getting the data`.
+Tech stack: Python · TensorFlow · Keras · Matplotlib · Jupyter · Docker
 
-## Technical aspects
+---
 
-To develop this Machine Learning model you will have to primary interact with the Jupyter notebook provided, called `AnyoneAI - Sprint Project 04.ipynb`. This notebook will guide you through all the steps you have to follow and the code you have to complete in the different parts of the project, also marked with a `TODO` comment.
+## 2. About the Data
 
-The only file having `TODO`s that will require you to add your own code is `src/models.py`.
+The dataset consists of JPG images organized into folders by label (vehicle make-model), split into train and test sets.
 
-The technologies involved are:
-- Python as the main programming language
-- Tensorflow and keras for building features and training ML models
-- Matplotlib for the visualizations
-- Jupyter notebooks to make the experimentation in an interactive way
+- **Classes**: 25 vehicle make-model combinations.
+- **Format**: JPG images, folder structure = label.
+- **Download**: automatically via the project notebook (`Section 1 - Getting the data`).
 
-## Training on GPUs
+---
 
-Note for some of the models you will use in this project, the most efficient way to train them is using GPUs.
+## 3. Usage Examples
 
-Currently one the best free options to get a GPU you can use for a couple of hours is Google Colab. To get access to GPUs trhough Colab, follow the steps below:
-- First, create a Google account if you don't already have one.
-- Go to the Google Colab website and sign in using your Google account credentials.
-- Open Google Drive service and upload your project code (make sure you've implemented all the TODOs and your code passes the unit tests provided).
-- Open the folder with you code from Google Drive, right click on the notebook `AnyoneAI - Sprint Project 04.ipynb` and select "Open with:" -> "Google Colaboratory"
-- In the new notebook, click on "Runtime" in the top menu and select "Change runtime type".
-- Select "GPU" as the hardware accelerator, which will allow for faster model training.
+**Option A — Virtual environment:**
 
-**Important Note: ** In the version of Colab that is free of charge notebooks can run for at most 12 hours, depending on availability and your usage patterns.
+```bash
+pip install -r requirements.txt
+jupyter notebook Vehicle-Inventory-Classification.ipynb
+```
 
-## Installation
+**Option B — Docker (CPU):**
 
-### Option A. Virtual environment
+```bash
+docker build -t sp_04 --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -f docker/Dockerfile .
+docker run --rm --net host -it -v $(pwd):/home/app/src --workdir /home/app/src sp_04 bash
+```
 
-A `requirements.txt` file is provided with all the needed Python libraries for running this project. For installing the dependencies just run:
+**Option B — Docker (GPU):**
+
+```bash
+docker build -t sp_04 --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -f docker/Dockerfile_gpu .
+docker run --rm --net host --gpus all -it -v $(pwd):/home/app/src --workdir /home/app/src sp_04 bash
+```
+
+> For GPU training on a free tier, use [Google Colab](https://colab.research.google.com) with Runtime → Change runtime type → GPU.
+
+---
+
+## 4. Project Structure
+
+<details>
+  <summary>📂 Expand for Project Structure</summary>
 
 ```console
-$ pip install -r requirements.txt
+├── docker/
+│   ├── Dockerfile
+│   ├── Dockerfile.M1
+│   └── Dockerfile_gpu
+├── src/
+│   └── models.py             # Model architecture (implement TODOs here)
+├── tests/
+│   └── test_models.py
+├── Vehicle-Inventory-Classification.ipynb
+├── image.png
+├── README.md
+└── requirements.txt
 ```
+</details>
 
-*Note:* We encourage you to install those inside a virtual environment.
+---
 
-### Option B. Using Docker
-
-You can use `Docker` to install all the needed packages and libraries easily. Two Dockerfiles are provided for both CPU and GPU support.
-
-- **CPU:**
+## 5. Requirements
 
 ```bash
-$ docker build -t sp_04 --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -f docker/Dockerfile .
+pip install -r requirements.txt
 ```
 
-- **M1:**
+Key dependencies:
+- TensorFlow · Keras
+- matplotlib
+- Jupyter
+- black · isort (code formatting)
+
+---
+
+## 6. Tests
 
 ```bash
-$ docker build -t sp_04 --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -f docker/Dockerfile.M1 .
+pytest tests/
 ```
 
-- **GPU:**
+---
 
-```bash
-$ docker build -t sp_04 --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -f docker/Dockerfile_gpu .
-```
+## 7. Contributing
 
-#### Run Docker
+Contributions are welcome. To contribute:
 
-- **CPU:**
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a Pull Request.
 
-```bash
-$ docker run --rm --net host -it \
-    -v $(pwd):/home/app/src \
-    --workdir /home/app/src \
-    sp_04 \
-    bash
-```
+---
 
-- **GPU:**
+## 8. License
 
-```bash
-$ docker run --rm --net host --gpus all -it \
-    -v $(pwd):/home/app/src \
-    --workdir /home/app/src \
-    sp_04 \
-    bash
-```
+This project is licensed under the MIT License.
 
-## Code Style
+---
 
-Following a style guide keeps the code's aesthetics clean and improves readability, making contributions and code reviews easier. Automated Python code formatters make sure your codebase stays in a consistent style without any manual work on your end. If adhering to a specific style of coding is important to you, employing an automated to do that job is the obvious thing to do. This avoids bike-shedding on nitpicks during code reviews, saving you an enormous amount of time overall.
+## 9. Project Origin
 
-We use [Black](https://black.readthedocs.io/) and [isort](https://pycqa.github.io/isort/) for automated code formatting in this project, you can run it with:
-
-```console
-$ isort --profile=black . && black --line-length 88 .
-```
-
-Wanna read more about Python code style and good practices? Please see:
-- [The Hitchhiker’s Guide to Python: Code Style](https://docs.python-guide.org/writing/style/)
-- [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
-
-## Tests
-
-We provide unit tests along with the project that you can run and check from your side the code meets the minimum requirements of correctness needed to approve. To run just execute:
-
-```console
-$ pytest tests/
-```
-
-If you want to learn more about testing Python code, please read:
-- [Effective Python Testing With Pytest](https://realpython.com/pytest-python-testing/)
-- [The Hitchhiker’s Guide to Python: Testing Your Code](https://docs.python-guide.org/writing/tests/)
+Based on an AnyoneAI sprint project on deep learning and computer vision for vehicle classification.

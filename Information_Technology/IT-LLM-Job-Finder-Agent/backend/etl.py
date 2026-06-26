@@ -63,9 +63,12 @@ class ETLProcessor:
         self.collection_name = collection_name
         self.persist_directory = persist_directory
 
-        # TODO: Create a text splitter using the
-        # `langchain.text_splitter.RecursiveCharacterTextSplitter` class.
-        # Hint: Use the `chunk_size` and `chunk_overlap` parameters.
+        # Text splitter instance
+        self.text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        length_function=len,
+        add_start_index=True,)
 
 
     def load_data(self) -> pd.DataFrame:
@@ -77,13 +80,23 @@ class ETLProcessor:
         df : pd.DataFrame
             Jobs descriptions with extra metadata from the dataset.
         """
-        # TODO: Load the dataset from the `dataset_path` using the
-        # `pandas.read_csv()` function.
-        # Keep only the following columns: "description", "Employment type",
-        # "Seniority level", "company", "location", "post_url", "title".
-        # Discard the rest.
-        # Drop the entire row if any nan values are found on some of the
-        # chosen columns.
+        # Load the dataset from the `dataset_path` using the
+        df = pd.read_csv(self.dataset_path)
+
+        #Keep only the columns required for embeddings and job metadata.
+        columns_useful = [
+            "description",
+            "title",
+            "company",
+            "location",
+            "Employment type",
+            "Seniority level",
+            "post_url"
+        ]
+        df = df[columns_useful]
+        df = df.dropna(subset=columns_useful)
+        
+        return df
         
 
     def create_documents(self, descriptions: pd.DataFrame) -> List[Document]:
