@@ -86,7 +86,16 @@ Average delivery delay in December: +3.2 days vs estimated
 │   ├── freight_value_weight_relationship.png
 │   └── orders_per_day_and_holidays.png
 ├── queries/
-│   └── revenue_by_category.sql
+│   ├── delivery_date_difference.sql
+│   ├── freight_value_weight_relationship.sql
+│   ├── global_ammount_order_status.sql
+│   ├── orders_per_day_and_holidays_2017.sql
+│   ├── real_vs_estimated_delivered_time.sql
+│   ├── revenue_by_category.sql
+│   ├── revenue_by_month_year.sql
+│   ├── revenue_per_state.sql
+│   ├── top_10_least_revenue_categories.sql
+│   └── top_10_revenue_categories.sql
 ├── src/
 │   ├── __init__.py
 │   ├── config.py

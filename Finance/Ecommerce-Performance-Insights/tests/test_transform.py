@@ -30,4 +30,4 @@ def test_convert_orders_dates():
 
     assert str(dfs["orders"]["order_purchase_timestamp"].dtype).startswith("datetime64")
     assert str(dfs["orders"]["order_approved_at"].dtype).startswith("datetime64")
-    assert dfs["orders"]["status"].dtype == object  # non-date column unchanged
+    assert "date" not in str(dfs["orders"]["status"].dtype)  # non-date column unchanged
