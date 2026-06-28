@@ -55,19 +55,6 @@ Run the main analysis notebook:
 jupyter notebook Ecommerce-Performance-Insights.ipynb
 ```
 
-Or run SQL queries directly:
-
-```bash
-# Revenue by year
-sqlite3 datasets.db < queries/revenue_by_month_year.sql
-
-# Top 10 product categories by revenue
-sqlite3 datasets.db < queries/top_10_revenue_categories.sql
-
-# Delivery performance vs estimated dates
-sqlite3 datasets.db < queries/real_vs_estimated_delivered_time.sql
-```
-
 Example insight from the analysis:
 
 ```
@@ -99,13 +86,7 @@ Average delivery delay in December: +3.2 days vs estimated
 │   ├── freight_value_weight_relationship.png
 │   └── orders_per_day_and_holidays.png
 ├── queries/
-│   ├── delivery_date_difference.sql
-│   ├── global_ammount_order_status.sql
-│   ├── real_vs_estimated_delivered_time.sql
-│   ├── revenue_by_month_year.sql
-│   ├── revenue_per_state.sql
-│   ├── top_10_least_revenue_categories.sql
-│   └── top_10_revenue_categories.sql
+│   └── revenue_by_category.sql
 ├── src/
 │   ├── __init__.py
 │   ├── config.py
@@ -115,10 +96,9 @@ Average delivery delay in December: +3.2 days vs estimated
 │   └── transform.py
 ├── tests/
 │   ├── __init__.py
-│   ├── query_results/
 │   ├── test_extract.py
+│   ├── test_load.py
 │   └── test_transform.py
-├── ASSIGNMENT.md
 ├── Ecommerce-Performance-Insights.ipynb
 ├── README.md
 └── requirements.txt
@@ -133,9 +113,9 @@ Average delivery delay in December: +3.2 days vs estimated
 pip install -r requirements.txt
 ```
 
-- Jupyter==1.0.0
+- jupyter==1.0.0
 - black==22.12.0
-- db-sqlite3==0.0.1
+- duckdb==1.5.3
 - matplotlib==3.6.2
 - pandas==1.4.4
 - numpy==1.22.4
@@ -144,7 +124,6 @@ pip install -r requirements.txt
 - plotly_express==0.4.1
 - requests==2.26.0
 - seaborn==0.11.2
-- SQLAlchemy==1.4.45
 - nbformat==5.7.3
 - pytest==7.2.1
 

@@ -1,5 +1,6 @@
 # Specific virtual environment
 envEPI/
+EPI/
 
 # Compiled Python files
 *.pyc
@@ -21,3 +22,11 @@ __pycache__/
 # Ignore databases and files
 *.db
 *.csv
+
+# Draft/scratch notebooks
+Ecommer.ipynb
+Ecommerce_eda.ipynb
+
+# Personal notes
+notas.json
+NOTES.md
