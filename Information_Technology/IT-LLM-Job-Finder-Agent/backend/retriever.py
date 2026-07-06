@@ -11,7 +11,6 @@ from backend.config import settings
 
 def load_vector_store() -> Chroma:
     """Build a vector base on Chroma. As a embedding function, we use HuggingFaceEmbeddings"""
-    print(settings.CHROMA_DB_PATH, settings.CHROMA_COLLECTION)
     return Chroma(
         persist_directory=settings.CHROMA_DB_PATH,
         collection_name=settings.CHROMA_COLLECTION,

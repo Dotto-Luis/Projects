@@ -9,9 +9,11 @@ from backend.models.jobs_finder import JobsFinderAssistant
 from backend.models.jobs_finder_agent import JobsFinderAgent
 
 
+@patch("backend.models.jobs_finder.Retriever")
 @patch("backend.models.jobs_finder.resume_summarizer")
-def test_jobs_finder_agent(resume_summarizer_chain_mock):
+def test_jobs_finder_agent(resume_summarizer_chain_mock, retriever_mock):
     resume_summarizer_chain_mock.return_value = MagicMock()
+    retriever_mock.return_value = MagicMock()
 
     job_finder_agent = JobsFinderAgent(
         resume="resume",

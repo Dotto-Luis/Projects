@@ -10,3 +10,17 @@ __pycache__/
 # Environment files
 .env
 .env.*
+!env.example
+
+# Test & tooling caches
+.pytest_cache/
+
+# Generated artifacts
+chroma/
+*.zip
+
+# Full dataset (74MB) — a 300-row sample is committed instead
+dataset/jobs.csv
+
+# OS files
+.DS_Store

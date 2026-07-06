@@ -41,7 +41,7 @@ Two data sources are combined:
 <details>
   <summary>Data Schema 🗂️</summary>
 
-  ![Data Schema](https://raw.githubusercontent.com/Dotto-Luis/Projects/2527e12fd79f4527b7e0aad9e2c2a0fb0f6637d9/Finance/Ecommerce-Performance-Insights/Images/data_schema.png)
+  ![Data Schema](https://raw.githubusercontent.com/Dotto-Luis/Projects/2527e12fd79f4527b7e0aad9e2c2a0fb0f6637d9/Finance/Ecommerce-Performance-Insights/images/data_schema.png)
 
 </details>
 

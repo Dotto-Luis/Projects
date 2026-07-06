@@ -7,7 +7,13 @@ from pydantic_settings import BaseSettings
 load_dotenv(find_dotenv(".env"))
 
 root = Path(__file__).parent.parent
-print("root", root)
+
+# Use the full dataset if available locally, otherwise fall back to the
+# committed sample so the project runs out of the box after cloning.
+_full_dataset = root / "dataset" / "jobs.csv"
+_default_dataset = (
+    _full_dataset if _full_dataset.exists() else root / "dataset" / "jobs_sample.csv"
+)
 
 
 class Settings(BaseSettings):
@@ -25,7 +31,7 @@ class Settings(BaseSettings):
     LANGCHAIN_VERBOSE: bool = False
 
     # Document Ingestion
-    DATASET_PATH: Optional[str] = f"{root}/dataset/jobs.csv"
+    DATASET_PATH: Optional[str] = str(_default_dataset)
     CHROMA_DB_PATH: Optional[str] = f"{root}/chroma"
     CHROMA_COLLECTION: Optional[str] = "jobs"
     EMBEDDINGS_MODEL: Optional[str] = "paraphrase-MiniLM-L6-v2"

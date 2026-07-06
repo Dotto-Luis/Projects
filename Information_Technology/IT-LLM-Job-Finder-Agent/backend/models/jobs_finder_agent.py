@@ -1,8 +1,8 @@
-from langchain import hub
 from langchain.agents import AgentExecutor, Tool, create_openai_functions_agent
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 from backend.config import settings
 from backend.models.jobs_finder import JobsFinderAssistant
@@ -111,8 +111,16 @@ class JobsFinderAgent:
             ),
         ]
 
-        prompt = hub.pull("hwchase17/openai-functions-agent")
-        print(f"Prompt pulled from hub: {prompt}")
+        # Local equivalent of the "hwchase17/openai-functions-agent" hub prompt.
+        # Defined inline to avoid a network call to LangChain Hub at startup.
+        prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", "You are a helpful assistant"),
+                MessagesPlaceholder(variable_name="chat_history", optional=True),
+                ("human", "{input}"),
+                MessagesPlaceholder(variable_name="agent_scratchpad"),
+            ]
+        )
 
         # Construct the OpenAI Tools agent
         # agent = create_react_agent(self.llm, tools, prompt)
