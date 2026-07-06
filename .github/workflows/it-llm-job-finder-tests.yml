@@ -1,0 +1,31 @@
+name: IT-LLM-Job-Finder-Agent tests
+
+on:
+  push:
+    paths:
+      - "Information_Technology/IT-LLM-Job-Finder-Agent/**"
+      - ".github/workflows/it-llm-job-finder-tests.yml"
+  pull_request:
+    paths:
+      - "Information_Technology/IT-LLM-Job-Finder-Agent/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Information_Technology/IT-LLM-Job-Finder-Agent
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: Information_Technology/IT-LLM-Job-Finder-Agent/requirements-test.txt
+
+      - name: Install test dependencies
+        run: pip install -r requirements-test.txt
+
+      - name: Run unit tests
+        run: python -m pytest tests -v
