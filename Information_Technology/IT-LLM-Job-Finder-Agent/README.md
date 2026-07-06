@@ -1,8 +1,6 @@
 # IT LLM Job Finder Agent #AIAgents
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/it-llm-job-finder-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/it-llm-job-finder-tests.yml)
-
-![Cover](https://github.com/Dotto-Luis/Projects/blob/main/Information_Technology/IT-LLM-Job-Finder-Agent/images/cover.png?raw=true)
+![Cover](images/cover.png)
 
 ## Table of Contents
 

@@ -1,6 +1,6 @@
 # Ecommerce Performance Insights — Olist #EDA
 
-![Cover](https://github.com/Dotto-Luis/Projects/assets/93018629/563736c7-5170-456f-9921-1d1f03671024)
+![Cover](images/cover.png)
 
 ## Table of Contents
 
