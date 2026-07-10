@@ -1,63 +1,61 @@
 from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
-from langchain.vectorstores import Chroma
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_chroma import Chroma
+from langchain_core.prompts import PromptTemplate
+from langchain_huggingface import HuggingFaceEmbeddings, HuggingFacePipeline
 from transformers import AutoTokenizer, pipeline
-from langchain_huggingface import HuggingFacePipeline
+
 from src.prompts import get_prompt_template
+
+# flan-t5-base is a seq2seq model: CPU-friendly and compatible with the
+# "text2text-generation" pipeline. Must match src/model_downloader.py.
+DEFAULT_MODEL_ID = "google/flan-t5-base"
+DEFAULT_EMBEDDINGS_MODEL = "all-MiniLM-L6-v2"
 
 
 def build_rag_chain(
     persist_directory: str = "db/chroma/",
-    model_id: str = "stabilityai/stablelm-tuned-alpha-3b"
+    model_id: str = DEFAULT_MODEL_ID,
 ) -> RetrievalQA:
     """
     Builds a RAG chain using a local LLM and Chroma vector DB, with a custom prompt.
 
     Args:
         persist_directory (str): Path to the Chroma DB.
-        model_id (str): Hugging Face model ID for the LLM.
+        model_id (str): Hugging Face model ID for the LLM (seq2seq).
 
     Returns:
         RetrievalQA: LangChain chain ready to handle queries.
     """
-    try:
-        # Load vector store
-        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-        vectordb = Chroma(
-            persist_directory=persist_directory,
-            embedding_function=embeddings
-        )
+    # Load vector store
+    embeddings = HuggingFaceEmbeddings(model_name=DEFAULT_EMBEDDINGS_MODEL)
+    vectordb = Chroma(
+        persist_directory=persist_directory,
+        embedding_function=embeddings,
+    )
 
-        # Load language model
-        tokenizer = AutoTokenizer.from_pretrained(model_id)
-        generator = pipeline(
+    # Load language model (local, CPU)
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    generator = pipeline(
         "text2text-generation",
         model=model_id,
         tokenizer=tokenizer,
-        device=-1  # CPU
-        )
+        device=-1,  # CPU
+    )
+    llm = HuggingFacePipeline(pipeline=generator)
 
-        llm = HuggingFacePipeline(pipeline=generator)
+    # Load prompt template
+    prompt = PromptTemplate(
+        input_variables=["context", "question"],
+        template=get_prompt_template(),
+    )
 
-        # Load prompt template
-        prompt = PromptTemplate(
-            input_variables=["context", "question"],
-            template=get_prompt_template()
-        )
-
-        # Build RAG chain
-        qa_chain = RetrievalQA.from_chain_type(
+    # Build RAG chain
+    qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         retriever=vectordb.as_retriever(),
         chain_type="stuff",
         chain_type_kwargs={"prompt": prompt},
-        return_source_documents=False
-        )
+        return_source_documents=False,
+    )
 
-        print("✅ RAG chain with custom prompt ready")
-        return qa_chain
-
-    except Exception as e:
-        print(f"❌ Error building RAG chain: {e}")
-        return None
+    return qa_chain

@@ -22,7 +22,8 @@ Lang/
 .DS_Store
 
 # Chroma DB
-db/chroma/
+db/
+notebooks/db/
 
 # Model folders (if downloaded manually)
 models/

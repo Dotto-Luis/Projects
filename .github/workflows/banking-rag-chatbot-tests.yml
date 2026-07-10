@@ -1,0 +1,30 @@
+name: GenerativeAI-Banking-RAG-Chatbot tests
+
+on:
+  push:
+    paths:
+      - "Information_Technology/GenerativeAI-Banking-RAG-Chatbot/**"
+      - ".github/workflows/banking-rag-chatbot-tests.yml"
+  pull_request:
+    paths:
+      - "Information_Technology/GenerativeAI-Banking-RAG-Chatbot/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Information_Technology/GenerativeAI-Banking-RAG-Chatbot
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: Information_Technology/GenerativeAI-Banking-RAG-Chatbot/uv.lock
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Run unit tests
+        run: uv run pytest tests -v

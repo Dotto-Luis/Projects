@@ -1,0 +1,43 @@
+[project]
+name = "generativeai-banking-rag-chatbot"
+version = "1.0.0"
+description = "RAG chatbot over banking PDFs using a local LLM (flan-t5), ChromaDB and OCR ingestion"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # langchain pinned <1.0: the chain uses RetrievalQA, removed in langchain 1.x
+    "langchain>=0.3,<1.0",
+    "langchain-core>=0.3,<1.0",
+    "langchain-huggingface>=0.1,<0.2",
+    "langchain-chroma>=0.2,<0.3",
+    "transformers>=4.40",
+    "sentence-transformers>=3.0",
+    "torch>=2.0",
+    "chromadb>=0.5",
+    "pymupdf>=1.24",
+    "pytesseract>=0.3.10",
+    "pillow>=10.0",
+    "tqdm>=4.66",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "jupyter>=1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false
+
+# On Linux (CI) use CPU-only torch wheels: much smaller and faster to install.
+# macOS keeps the default wheels.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]

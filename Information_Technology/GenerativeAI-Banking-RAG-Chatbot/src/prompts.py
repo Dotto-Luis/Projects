@@ -1,7 +1,9 @@
-def get_prompt_template():
+def get_prompt_template() -> str:
+    """Prompt template for the banking document Q&A chain."""
     return (
-        "Usá el siguiente contexto para responder la pregunta.\n\n"
-        "Pregunta: {question}\n"
-        "Contexto: {context}\n\n"
-        "Respuesta:"
+        "Use the following context to answer the question. "
+        "If the answer is not in the context, say you don't know.\n\n"
+        "Question: {question}\n"
+        "Context: {context}\n\n"
+        "Answer:"
     )
