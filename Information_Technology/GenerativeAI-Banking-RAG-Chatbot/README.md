@@ -39,7 +39,7 @@ flowchart LR
     EMB --> DB[(ChromaDB)]
 
     Q([User question]) --> CHAIN{RetrievalQA<br/>chain}
-    DB -- top-k chunks --> CHAIN
+    DB -- "top-k chunks" --> CHAIN
     CHAIN --> LLM[flan-t5-base<br/>local, CPU]
     LLM --> A([Answer])
 ```
