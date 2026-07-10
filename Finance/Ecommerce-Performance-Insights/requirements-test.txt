@@ -1,0 +1,5 @@
+# Minimal dependencies to run the unit test suite. CI uses this file for fast runs.
+pandas>=2.0
+duckdb>=1.0
+requests>=2.26
+pytest>=8.0

@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-DATASET_ROOT_PATH = str(Path(__file__).parent.parent / "dataset")
+DATASET_ROOT_PATH = str(Path(__file__).parent.parent / "datasets")
 os.makedirs(DATASET_ROOT_PATH, exist_ok=True)
 
 DATASET_TRAIN = str(Path(DATASET_ROOT_PATH) / "application_train_aai.csv")

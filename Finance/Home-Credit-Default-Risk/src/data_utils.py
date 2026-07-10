@@ -38,7 +38,7 @@ def get_datasets() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
 
     app_train = pd.read_csv(config.DATASET_TRAIN)
     app_test = pd.read_csv(config.DATASET_TEST)
-    columns_description = pd.read_csv(config.DATASET_DESCRIPTION_URL)
+    columns_description = pd.read_csv(config.DATASET_DESCRIPTION)
 
     return app_train, app_test, columns_description
 
@@ -78,8 +78,6 @@ def get_feature_target(
     y_train = app_train["TARGET"]
     X_test = app_test.drop(columns=["TARGET"])
     y_test = app_test["TARGET"]
-
-    return X_train, y_train, X_test, y_test
 
     return X_train, y_train, X_test, y_test
 

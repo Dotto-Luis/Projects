@@ -36,9 +36,17 @@ def preprocess_data(
 
     # 1. Correct outliers/anomalous values in numerical
     # columns (`DAYS_EMPLOYED` column).
-    working_train_df["DAYS_EMPLOYED"].replace({365243: np.nan}, inplace=True)
-    working_val_df["DAYS_EMPLOYED"].replace({365243: np.nan}, inplace=True)
-    working_test_df["DAYS_EMPLOYED"].replace({365243: np.nan}, inplace=True)
+    # Note: assignment (not inplace=True) is required — under pandas>=3
+    # Copy-on-Write, chained inplace replace is a silent no-op.
+    working_train_df["DAYS_EMPLOYED"] = working_train_df["DAYS_EMPLOYED"].replace(
+        {365243: np.nan}
+    )
+    working_val_df["DAYS_EMPLOYED"] = working_val_df["DAYS_EMPLOYED"].replace(
+        {365243: np.nan}
+    )
+    working_test_df["DAYS_EMPLOYED"] = working_test_df["DAYS_EMPLOYED"].replace(
+        {365243: np.nan}
+    )
 
     # 2. TODO Encode string categorical features (dytpe `object`):
     #     - If the feature has 2 categories encode using binary encoding,
@@ -55,15 +63,16 @@ def preprocess_data(
     #     OneHotEncoder classes, then use the fitted models to transform all the
     #     datasets.
 
-    # Identify categorical columns to be encoded
+    # Identify categorical columns to be encoded.
+    # exclude=["number"] selects object/str columns on both pandas 2 and 3
+    # (pandas 3 introduces a dedicated "str" dtype).
     def get_categorical_columns(df, list1, list2):
-        col = df.select_dtypes(include=["object"]).nunique() == 2
+        col = df.select_dtypes(exclude=["number"]).nunique() == 2
         for name, value in col.items():
-            if value == True:
+            if value:
                 list1.append(name)
             else:
                 list2.append(name)
-        return list
 
     ordinal_col = []
     onehot_col = []

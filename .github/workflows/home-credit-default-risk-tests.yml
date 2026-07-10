@@ -1,0 +1,30 @@
+name: Home-Credit-Default-Risk tests
+
+on:
+  push:
+    paths:
+      - "Finance/Home-Credit-Default-Risk/**"
+      - ".github/workflows/home-credit-default-risk-tests.yml"
+  pull_request:
+    paths:
+      - "Finance/Home-Credit-Default-Risk/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Finance/Home-Credit-Default-Risk
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: Finance/Home-Credit-Default-Risk/uv.lock
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Run unit tests
+        run: uv run pytest tests -v

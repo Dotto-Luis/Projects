@@ -1,0 +1,16 @@
+# Data files (downloaded on first run via gdown)
+datasets/*.csv
+!datasets/HomeCredit_columns_description.csv
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

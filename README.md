@@ -8,6 +8,17 @@ Organized according to **The Global Industry Classification Standard** ([GICS - 
 
 ---
 
+## ⭐ Featured
+
+Production-quality projects with tests, CI, and full documentation:
+
+- [**IT-LLM-Job-Finder-Agent**](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/IT-LLM-Job-Finder-Agent) — LLM agent with RAG: resume in, matched jobs + tailored cover letters out. LangChain · ChromaDB · Chainlit [![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/it-llm-job-finder-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/it-llm-job-finder-tests.yml)
+- [**Ecommerce-Performance-Insights**](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Performance-Insights) — ELT pipeline over 100k Olist orders: revenue & delivery KPIs. Python · DuckDB · SQL [![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/ecommerce-performance-insights-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/ecommerce-performance-insights-tests.yml)
+
+🌐 Full portfolio: [dotto-luis.github.io](https://dotto-luis.github.io/)
+
+---
+
 ## 🎬 Communication Services
 - [SentimentClassifier-MovieReviews](https://github.com/Dotto-Luis/Projects/tree/main/Communication_Services/SentimentClassifier-MovieReviews) — **NLP / Sentiment Analysis**
 

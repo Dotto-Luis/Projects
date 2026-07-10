@@ -1,5 +1,7 @@
 # Ecommerce Performance Insights — Olist #EDA
 
+[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/ecommerce-performance-insights-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/ecommerce-performance-insights-tests.yml)
+
 ![Cover](images/cover.png)
 
 ## Table of Contents
@@ -10,7 +12,7 @@
 4. [Project Structure](#project-structure)
 5. [Requirements](#requirements)
 6. [Tests](#tests)
-7. [Contributing](#contributing)
+7. [Results / Output](#7-results--output)
 8. [License](#license)
 9. [Project Origin](#project-origin)
 
@@ -148,21 +150,26 @@ Tests cover data extraction and transformation modules.
 
 ---
 
-## 7. Contributing
+## 7. Results / Output
 
-Contributions are welcome. To contribute:
+Key findings from the 2016–2018 analysis:
 
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a Pull Request.
+- **Revenue:** 2018 closed at R$ 8.5M (+35% vs 2017), led by *health_beauty* (R$ 1.2M).
+- **Delivery:** December shows the worst average delay (+3.2 days vs estimated), and order volume spikes around public holidays.
+
+**Orders per day vs public holidays:**
+
+![Orders per day and holidays](images/orders_per_day_and_holidays.png)
+
+**Freight value vs product weight:**
+
+![Freight value vs weight](images/freight_value_weight_relationship.png)
 
 ---
 
 ## 8. License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License — see [LICENSE](LICENSE).
 
 ---
 
