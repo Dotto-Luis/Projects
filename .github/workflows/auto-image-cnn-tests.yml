@@ -1,0 +1,32 @@
+name: Auto-Image-CNN tests
+
+on:
+  push:
+    paths:
+      - "Information_Technology/Auto-Image-CNN/**"
+      - ".github/workflows/auto-image-cnn-tests.yml"
+  pull_request:
+    paths:
+      - "Information_Technology/Auto-Image-CNN/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Information_Technology/Auto-Image-CNN
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: Information_Technology/Auto-Image-CNN/uv.lock
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      # API unit tests (model calls are mocked). The model service test runs
+      # real TensorFlow inference and is exercised via its Docker build instead.
+      - name: Run API unit tests
+        run: cd api && uv run --project .. pytest tests -v

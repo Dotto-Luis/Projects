@@ -18,12 +18,9 @@ def allowed_file(filename):
     bool
         True if the file is an image, False otherwise.
     """
-    # TODO
-    allowed_extensions = {'png', 'jpg', 'jpeg', 'gif'}
-    file_extension = filename.rsplit('.', 1)[-1].lower()
-    return '.' in filename and file_extension in allowed_extensions
-
-    #raise NotImplementedError
+    allowed_extensions = {"png", "jpg", "jpeg", "gif"}
+    file_extension = filename.rsplit(".", 1)[-1].lower()
+    return "." in filename and file_extension in allowed_extensions
 
 
 def get_file_hash(file):

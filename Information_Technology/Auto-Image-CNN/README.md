@@ -1,56 +1,71 @@
 # Auto Image CNN — Flask ML API #DeepLearning
 
-![Cover](https://github.com/Dotto-Luis/Projects/blob/main/Information_Technology/Auto-Image-CNN/images/cover.png?raw=true)
+[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/auto-image-cnn-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/auto-image-cnn-tests.yml)
+
+![Cover](images/cover.png)
 
 ## Table of Contents
 
-1. [Business Goal](#business-goal)
-2. [About the Data](#about-the-data)
-3. [Usage Examples](#usage-examples)
-4. [Project Structure](#project-structure)
-5. [Requirements](#requirements)
-6. [Tests](#tests)
-7. [Contributing](#contributing)
-8. [License](#license)
-9. [Project Origin](#project-origin)
+1. [Business Goal](#1-business-goal)
+2. [About the Data](#2-about-the-data)
+3. [Usage Examples](#3-usage-examples)
+4. [Project Structure](#4-project-structure)
+5. [Requirements](#5-requirements)
+6. [Tests](#6-tests)
+7. [Results / Output](#7-results--output)
+8. [License](#8-license)
+9. [Project Origin](#9-project-origin)
 
 ---
 
 ## 1. Business Goal
 
-Companies with large image collections need to automatically classify images into categories — manually doing so is time-consuming and error-prone. This project builds a solution that classifies images into over 1,000 categories using a pre-trained Convolutional Neural Network (CNN) served via a Python Flask API and a Web UI.
+Companies with large image collections need to classify images automatically — doing it manually is slow and error-prone. This project serves a pre-trained CNN (ImageNet, 1,000+ categories) as a **production-style microservice stack**:
 
-- The **Web UI** allows users to upload an image and receive the predicted class.
-- The **Flask API** preprocesses the image, runs inference, and returns the result as JSON.
-- **Redis** is used for asynchronous communication between microservices.
+- **Web UI + Flask API**: upload an image, get the predicted class and confidence as JSON.
+- **Model service**: separate container running TensorFlow inference.
+- **Redis** as message broker between services — the API never blocks on the model: requests are queued and consumed asynchronously.
+- **Docker Compose** orchestrates the three services; **Locust** provides load testing.
 
-Tech stack: Python · Flask · TensorFlow · Redis · Docker · Locust
+The point of the architecture: API and model scale independently — under load you add model replicas without touching the API.
+
+### Architecture
+
+![Architecture](images/architecture.png)
 
 ---
 
 ## 2. About the Data
 
-This project uses a pre-trained ImageNet model (1,000+ categories). No custom dataset is required — the model is loaded from a pre-trained checkpoint provided via Google Drive.
+No custom dataset: the model service loads a CNN pre-trained on **ImageNet** (1,000+ classes). Any JPEG/PNG/GIF image can be submitted through the UI or the API.
 
 ---
 
 ## 3. Usage Examples
 
-Start all services:
-
 ```bash
+# 1. Configure environment (UID/GID for container permissions)
 cp .env.original .env
-# Edit .env with your UID and GID (run: id -u && id -g)
+
+# 2. Start the stack: API + model service + Redis
 docker-compose up --build -d
+
+# 3. Open the UI
+#    http://localhost
 ```
 
-Stop services:
+Or hit the API directly:
 
 ```bash
-docker-compose down
+curl -X POST http://localhost/predict -F "file=@stress_test/dog.jpeg"
+# {"success": true, "prediction": "Eskimo_dog", "score": 0.9346}
 ```
 
-Then navigate to `http://localhost` to upload images and get predictions.
+Load testing with Locust:
+
+```bash
+cd stress_test && locust -f locustfile.py --host http://localhost
+```
 
 ---
 
@@ -60,23 +75,22 @@ Then navigate to `http://localhost` to upload images and get predictions.
   <summary>📂 Expand for Project Structure</summary>
 
 ```console
-├── api/
-│   ├── Dockerfile
-│   └── src/
-│       ├── app.py
-│       └── tests/
-├── model/
-│   ├── Dockerfile
-│   ├── Dockerfile.M1
-│   └── ml_service.py
+├── api/                       # Flask API + Web UI (own Dockerfile)
+│   ├── app.py
+│   ├── views.py               # Endpoints: / (UI), /predict, /feedback
+│   ├── middleware.py          # Redis queue: publish job, wait for result
+│   ├── utils.py               # File validation, MD5-based filenames
+│   └── tests/                 # Unit tests (model mocked)
+├── model/                     # TensorFlow inference service (own Dockerfile)
+│   ├── ml_service.py          # Redis consumer + CNN prediction
+│   └── tests/                 # Real-inference test (run via Docker)
 ├── stress_test/
-│   └── locustfile.py
+│   └── locustfile.py          # Load testing scenarios
 ├── tests/
-│   ├── requirements.txt
-│   └── test_integration.py
-├── ASSIGNMENT.md
-├── docker-compose.yml
-├── .env.original
+│   └── test_integration.py    # End-to-end test (requires running stack)
+├── docker-compose.yml         # api + model + redis
+├── Makefile
+├── pyproject.toml             # Dev/test environment (managed with uv)
 └── README.md
 ```
 </details>
@@ -85,54 +99,45 @@ Then navigate to `http://localhost` to upload images and get predictions.
 
 ## 5. Requirements
 
-```bash
-cp .env.original .env
-docker-compose up --build -d
-```
+Services run with **Docker Compose** (each service has its own Dockerfile and pinned requirements). For local development and unit tests, the dev environment is managed with [uv](https://docs.astral.sh/uv/):
 
-Dependencies (installed via Docker):
-- Python · Flask · TensorFlow · Redis · Locust
-
-For integration tests:
 ```bash
-pip install -r tests/requirements.txt
+uv sync
 ```
 
 ---
 
 ## 6. Tests
 
-**Unit tests (API):**
+**API unit tests** (model mocked — these run in CI):
 
 ```bash
-cd api/
-docker build -t flask_api_test --progress=plain --target test .
+cd api && uv run --project .. pytest tests -v
 ```
 
-**Unit tests (Model):**
+**Model service test** (real TensorFlow inference, via Docker):
 
 ```bash
-cd model/
-docker build -t model_test --progress=plain --target test .
+cd model && docker build -t model_test --progress=plain --target test .
 ```
 
-**Integration tests** (requires services running):
+**Integration test** (requires the stack running):
 
 ```bash
-python tests/test_integration.py
+docker-compose up -d && python tests/test_integration.py
 ```
 
 ---
 
-## 7. Contributing
+## 7. Results / Output
 
-Contributions are welcome. To contribute:
+The stack serves predictions end-to-end: an uploaded image is hashed (MD5) for deduplication, queued in Redis, consumed by the model service, and the prediction is returned to the UI/API:
 
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a Pull Request.
+```json
+{"success": true, "prediction": "Eskimo_dog", "score": 0.9346}
+```
+
+Under load testing with Locust, the async queue keeps the API responsive while the model service processes jobs at its own pace — the bottleneck (inference) is isolated and horizontally scalable.
 
 ---
 

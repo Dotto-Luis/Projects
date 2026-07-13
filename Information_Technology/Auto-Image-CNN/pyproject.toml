@@ -1,0 +1,22 @@
+# Dev/test environment for local tooling and CI (unit tests of the API).
+# The services themselves are built with Docker (see api/ and model/ Dockerfiles).
+[project]
+name = "auto-image-cnn"
+version = "1.0.0"
+description = "Image classification (ImageNet CNN) served as Flask + Redis microservices with Docker"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=3.0",
+    "pillow>=10.0",
+    "redis>=5.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "requests>=2.31",
+]
+
+[tool.uv]
+package = false
