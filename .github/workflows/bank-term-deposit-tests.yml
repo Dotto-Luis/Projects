@@ -1,0 +1,31 @@
+name: Bank-Term-Deposit tests
+
+on:
+  push:
+    paths:
+      - "Finance/Bank-Term-Deposit-Subscription-Predictor/**"
+      - ".github/workflows/bank-term-deposit-tests.yml"
+  pull_request:
+    paths:
+      - "Finance/Bank-Term-Deposit-Subscription-Predictor/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Finance/Bank-Term-Deposit-Subscription-Predictor
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: Finance/Bank-Term-Deposit-Subscription-Predictor/uv.lock
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      # Unit tests run on synthetic data — the real dataset is not needed.
+      - name: Run unit tests
+        run: uv run pytest tests -v

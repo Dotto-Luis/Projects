@@ -1,0 +1,25 @@
+[project]
+name = "bank-term-deposit-predictor"
+version = "1.0.0"
+description = "Term-deposit subscription prediction on the UCI Bank Marketing dataset, with explicit leakage handling"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scikit-learn>=1.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "jupyter>=1.0",
+    "matplotlib>=3.7",
+    "seaborn>=0.13",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false

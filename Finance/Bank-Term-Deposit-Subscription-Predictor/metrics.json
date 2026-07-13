@@ -1,0 +1,30 @@
+{
+  "without_duration_leakage": {
+    "logistic_regression": {
+      "roc_auc": 0.8009,
+      "pr_auc": 0.4599,
+      "recall": 0.6444,
+      "precision": 0.3671
+    },
+    "hist_gradient_boosting": {
+      "roc_auc": 0.8176,
+      "pr_auc": 0.4917,
+      "recall": 0.6476,
+      "precision": 0.4122
+    }
+  },
+  "with_duration_leakage_do_not_use": {
+    "logistic_regression": {
+      "roc_auc": 0.9438,
+      "pr_auc": 0.6223,
+      "recall": 0.9116,
+      "precision": 0.4517
+    },
+    "hist_gradient_boosting": {
+      "roc_auc": 0.9546,
+      "pr_auc": 0.6968,
+      "recall": 0.9343,
+      "precision": 0.4661
+    }
+  }
+}
