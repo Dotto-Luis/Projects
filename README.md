@@ -48,8 +48,6 @@ Production-quality projects with tests, CI, and full documentation:
 - [Auto-Image-CNN](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Auto-Image-CNN) — **Deep Learning / Computer Vision**
 - [Vehicle-Inventory-Classification](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Vehicle-Inventory-Classification) — **Classification / Computer Vision** *(WIP)*
 - [NYCTaxiFarePrediction](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/NYCTaxiFarePrediction) — **Regression / Predictive Modeling** *(WIP)*
-- [Crypto-Smart-Contracts](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Crypto-Smart-Contracts) — **Blockchain / Solidity**
-- [Crypto-Solana](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Crypto-Solana) — **Blockchain / Data Analytics**
 
 ---
 
