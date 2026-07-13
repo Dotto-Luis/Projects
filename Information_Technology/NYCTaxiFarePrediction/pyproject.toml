@@ -1,0 +1,36 @@
+# Dev/test environment for local tooling and CI.
+# The services (model, api, client) are built with Docker — see docker-compose.yml.
+[project]
+name = "nyc-taxi-fare-prediction"
+version = "1.0.0"
+description = "NYC taxi fare & trip duration prediction: LightGBM models served via Flask API + Next.js client"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scikit-learn>=1.3",
+    "flask>=3.0",
+    "flask-cors>=4.0",
+    "requests>=2.31",
+    "jupyter>=1.1.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+# Extra deps to run the training notebooks locally: uv sync --group train
+train = [
+    "jupyter>=1.0",
+    "lightgbm>=4.0",
+    "matplotlib>=3.7",
+    "pyarrow>=14.0",
+    "wget>=3.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false

@@ -1,0 +1,29 @@
+services:
+  api:
+    image: flask_api
+    build:
+      context: ./webapp/api
+    ports:
+      - 8000:8000
+    depends_on:
+      - modelsvc
+  client:
+    image: nextjs
+    build:
+      context: ./webapp/client
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+  modelsvc:
+    image: model
+    build:
+      context: ./model
+    # Host port 5001: macOS reserves 5000 for AirPlay Receiver.
+    # The api service reaches this container via the internal Docker
+    # network (http://modelsvc:5000), so this mapping is only for
+    # direct debugging from the host.
+    ports:
+      - 5001:5000

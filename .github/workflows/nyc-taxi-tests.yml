@@ -1,0 +1,32 @@
+name: NYCTaxiFarePrediction tests
+
+on:
+  push:
+    paths:
+      - "Information_Technology/NYCTaxiFarePrediction/**"
+      - ".github/workflows/nyc-taxi-tests.yml"
+  pull_request:
+    paths:
+      - "Information_Technology/NYCTaxiFarePrediction/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Information_Technology/NYCTaxiFarePrediction
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: Information_Technology/NYCTaxiFarePrediction/uv.lock
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      # Unit tests: preprocessing feature functions + API gateway with the
+      # model service mocked. No dataset or trained models needed.
+      - name: Run unit tests
+        run: uv run pytest tests -v
