@@ -43,16 +43,27 @@ No custom dataset: the model service loads a CNN pre-trained on **ImageNet** (1,
 
 ## 3. Usage Examples
 
+Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/) running.
+
 ```bash
-# 1. Configure environment (UID/GID for container permissions)
+# 1. Configure environment (set your UID/GID: run `id -u` and `id -g`)
 cp .env.original .env
 
 # 2. Start the stack: API + model service + Redis
 docker-compose up --build -d
 
-# 3. Open the UI
+# On Apple Silicon (M-series), force x86 emulation instead
+# (tensorflow 2.8 has no ARM wheels):
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose up --build -d
+
+# 3. Wait until the 3 services are Up (model takes ~1 min to load weights)
+docker-compose ps
+
+# 4. Open the UI and upload a JPEG/PNG/GIF
 #    http://localhost
 ```
+
+> Note: HEIC images (iPhone default) are not supported — convert to JPEG/PNG first. The first prediction takes longer while the model warms up.
 
 Or hit the API directly:
 
@@ -109,22 +120,28 @@ uv sync
 
 ## 6. Tests
 
-**API unit tests** (model mocked — these run in CI):
+Three levels, from lightest to heaviest:
+
+**1. API unit tests** (seconds, no Docker — model mocked; these run in CI):
 
 ```bash
+uv sync
 cd api && uv run --project .. pytest tests -v
+# Expected: 8 passed
 ```
 
-**Model service test** (real TensorFlow inference, via Docker):
+**2. Model service test** (real TensorFlow inference, via Docker — downloads model weights on first run):
 
 ```bash
 cd model && docker build -t model_test --progress=plain --target test .
+# On Apple Silicon add: --platform linux/amd64
 ```
 
-**Integration test** (requires the stack running):
+**3. Integration test** (end-to-end, requires the stack running — see Usage):
 
 ```bash
-docker-compose up -d && python tests/test_integration.py
+uv run python tests/test_integration.py
+# Expected: Ran 2 tests ... OK
 ```
 
 ---
