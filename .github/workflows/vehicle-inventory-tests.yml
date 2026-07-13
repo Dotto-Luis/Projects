@@ -1,0 +1,32 @@
+name: Vehicle-Inventory-Classification tests
+
+on:
+  push:
+    paths:
+      - "Information_Technology/Vehicle-Inventory-Classification/**"
+      - ".github/workflows/vehicle-inventory-tests.yml"
+  pull_request:
+    paths:
+      - "Information_Technology/Vehicle-Inventory-Classification/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Information_Technology/Vehicle-Inventory-Classification
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: Information_Technology/Vehicle-Inventory-Classification/uv.lock
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      # Architecture tests build the models offline (weights=None) — no
+      # dataset download or imagenet weights needed.
+      - name: Run unit tests
+        run: uv run pytest tests -v

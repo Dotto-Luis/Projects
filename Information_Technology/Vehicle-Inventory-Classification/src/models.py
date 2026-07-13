@@ -129,7 +129,9 @@ def create_lenet_model(
 
 
 def create_resnet50_model(
-    input_shape: Tuple[int, int, int], num_classes: int
+    input_shape: Tuple[int, int, int],
+    num_classes: int,
+    weights: str = "imagenet",
 ) -> Sequential:
     """
     Function to create a convolutional neural network model based on ResNet50
@@ -138,17 +140,15 @@ def create_resnet50_model(
     Args:
         input_shape (Tuple[int, int, int]): The shape of the input data.
         num_classes (int): The number of output classes.
+        weights (str): Pre-trained weights to load ("imagenet" downloads them;
+            None builds the architecture without weights — used by unit tests
+            to stay offline).
 
     Returns:
         A Sequential model object.
     """
-    # Create ResNet50 model for transfer learning (fine-tuning).
-    # Use `tensorflow.keras.applications.ResNet50()` and make sure to:
-    #   1. Use "imagenet" weights
-    #   2. Don't include the classification layer (include_top=False)
-    #   3. Define model input_shape equals to this function input_shape
-    # TODO
-    resnet = ResNet50(weights='imagenet',include_top=False, input_shape=input_shape)
+    # ResNet50 for transfer learning: no classification head (include_top=False)
+    resnet = ResNet50(weights=weights, include_top=False, input_shape=input_shape)
 
     # You shouldn't change the code below
     # Freeze all layers in the ResNet50 model

@@ -46,7 +46,7 @@ Production-quality projects with tests, CI, and full documentation:
 - [OpenAI-Agent-Toolkit](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/OpenAI-Agent-Toolkit) — **AI Agents / Automation**
 - [IT-LLM-Job-Finder-Agent](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/IT-LLM-Job-Finder-Agent) — **AI Agents / LangChain / RAG**
 - [Auto-Image-CNN](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Auto-Image-CNN) — **Deep Learning / Computer Vision**
-- [Vehicle-Inventory-Classification](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Vehicle-Inventory-Classification) — **Classification / Computer Vision** *(WIP)*
+- [Vehicle-Inventory-Classification](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/Vehicle-Inventory-Classification) — **Classification / Computer Vision**
 - [NYCTaxiFarePrediction](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/NYCTaxiFarePrediction) — **Regression / Predictive Modeling** *(WIP)*
 
 ---

@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Dataset (downloaded on first run)
+dataset/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

@@ -133,16 +133,16 @@ def test_create_lenet_model_output_shape_is_correct(input_shape, num_classes):
 
 
 def test_create_resnet50_model_return_type(input_shape, num_classes):
-    model = create_resnet50_model(input_shape, num_classes)
+    model = create_resnet50_model(input_shape, num_classes, weights=None)
     assert isinstance(model, Sequential)
 
 
 def test_create_resnet50_model_layer_count(input_shape, num_classes):
-    model = create_resnet50_model(input_shape, num_classes)
+    model = create_resnet50_model(input_shape, num_classes, weights=None)
     assert len(model.layers) == 4
 
 
 def test_create_resnet50_model_last_layer_activation(input_shape, num_classes):
-    model = create_resnet50_model(input_shape, num_classes)
+    model = create_resnet50_model(input_shape, num_classes, weights=None)
     last_layer = model.layers[-1]
     assert last_layer.activation.__name__ == "softmax"

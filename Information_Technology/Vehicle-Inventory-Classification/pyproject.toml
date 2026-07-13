@@ -1,0 +1,24 @@
+[project]
+name = "vehicle-inventory-classification"
+version = "1.0.0"
+description = "Multi-class vehicle make/model classification (25 classes) with CNNs and ResNet50 transfer learning"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "tensorflow>=2.16",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "gdown>=5.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "jupyter>=1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false
