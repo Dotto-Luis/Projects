@@ -69,34 +69,37 @@ def classify_process():
     received, then, run our ML model to get predictions.
     """
     while True:
-        # Inside this loop you should add the code to:
-        #   1. Take a new job from Redis
-        #   2. Run your ML model on the given data
-        #   3. Store model prediction in a dict with the following shape:
-        #      {
-        #         "prediction": str,
-        #         "score": float,
-        #      }
-        #   4. Store the results on Redis using the original job ID as the key
-        #      so the API can match the results it gets to the original job
-        #      sent
-        # Hint: You should be able to successfully implement the communication
-        #       code with Redis making use of functions `brpop()` and `set()`.
-        # TODO
+        # brpop blocks until a job is available and returns a
+        # (queue_name, message) tuple — the message is the JSON job payload
+        # pushed by the API: {"id": str, "image_name": str}
+        _, msg = db.brpop(settings.REDIS_QUEUE)
 
-        job_id, image_name = db.brpop(settings.REDIS_QUEUE)
+        # A single bad job (corrupt image, unsupported format, malformed
+        # payload) must never kill the service: report the error back to
+        # the API and keep consuming the queue.
+        try:
+            job = json.loads(msg)
+            job_id = job["id"]
+            image_name = job["image_name"]
+        except (ValueError, KeyError) as e:
+            print(f"Skipping malformed job payload: {e}")
+            continue
 
-        job_id = job_id.decode("utf-8")
+        try:
+            class_name, pred_probability = predict(image_name)
+            result = {
+                "prediction": class_name,
+                # numpy floats are not JSON serializable — cast to native float
+                "score": float(pred_probability),
+            }
+        except Exception as e:
+            print(f"Prediction failed for '{image_name}': {e}")
+            result = {
+                "prediction": f"ERROR: could not process image ({type(e).__name__})",
+                "score": 0.0,
+            }
 
-        class_name, pred_probability = predict(image_name)
-
-        result = {
-            "prediction": class_name,
-            "score": pred_probability
-        }
         db.set(job_id, json.dumps(result))
-
-        raise NotImplementedError
 
         # Sleep for a bit
         time.sleep(settings.SERVER_SLEEP)
