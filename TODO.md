@@ -1,5 +1,7 @@
 # Repo maintenance TODO
 
+- [ ] **Water-Quality-Prediction: venv commiteado.** `aqua3.10/` está trackeado en git con site-packages completos (cientos de archivos de pandas etc.). Primer paso de su circuito: `git rm -r --cached aqua3.10` + gitignore. También suma peso a la historia (ítem filter-repo).
+
 - [ ] **Limpiar historia de git (git filter-repo):** la historia contiene archivos pesados ya eliminados del working tree — `IT-LLM-Job-Finder-Agent_Luis_Dotto.zip` (12MB), `dataset/jobs.csv` (74MB) y `chroma/chroma.sqlite3`. Reescribe la historia del monorepo entero: hacerlo en un momento tranquilo, con backup, y force-push coordinado. Hasta entonces el repo funciona bien, solo pesa de más al clonar.
 - [x] **IT-LLM-Job-Finder-Agent:** cover subido a `images/cover.png`. ✔
 - [ ] **IT-LLM-Job-Finder-Agent:** smoke test end-to-end con API key (`etl.py` + `chainlit run` + conversación real).

@@ -1,6 +1,5 @@
 # Vehicle Inventory Classification #ComputerVision
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/vehicle-inventory-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/vehicle-inventory-tests.yml)
 
 ![Cover](images/cover.png)
 

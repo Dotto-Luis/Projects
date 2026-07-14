@@ -1,7 +1,5 @@
 # Home Credit Default Risk #Classification
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/home-credit-default-risk-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/home-credit-default-risk-tests.yml)
-
 ![Cover](images/cover.png)
 
 ## Table of Contents

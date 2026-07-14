@@ -1,6 +1,5 @@
 # GenerativeAI-Banking-RAG-Chatbot
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/banking-rag-chatbot-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/banking-rag-chatbot-tests.yml)
 
 ![Cover](images/cover.png)
 

@@ -1,6 +1,5 @@
 # Auto Image CNN — Flask ML API #DeepLearning
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/auto-image-cnn-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/auto-image-cnn-tests.yml)
 
 ![Cover](images/cover.png)
 

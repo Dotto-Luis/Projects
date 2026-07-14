@@ -1,0 +1,14 @@
+# Data (download from Kaggle into data/)
+data/*.csv
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

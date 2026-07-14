@@ -1,6 +1,5 @@
 # OpenAI-Agent-Toolkit
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/openai-agent-toolkit-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/openai-agent-toolkit-tests.yml)
 
 ![Cover](images/cover.png)
 

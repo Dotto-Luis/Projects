@@ -21,5 +21,5 @@ def ocr_pdf_to_text_chunks(pdf_path, chunk_size=500, overlap=50):
         chunk = full_text[i:i+chunk_size]
         chunks.append(chunk)
 
-    print(f"✅ OCR extraído y dividido en {len(chunks)} chunks")
+    print(f"OCR extracted and split into {len(chunks)} chunks")
     return chunks

@@ -31,13 +31,11 @@ Production-quality projects with tests, CI, and full documentation:
 ---
 
 ## 💰 Finance
-- [Quantitative-Finance-Data-Analysis](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Quantitative-Finance-Data-Analysis) — **EDA / Market Insights**
+- [Quantitative-Finance-Data-Analysis](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Quantitative-Finance-Data-Analysis) — **Fundamental Screener** *(in development)*
 - [Bank-Term-Deposit-Subscription-Predictor](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Bank-Term-Deposit-Subscription-Predictor) — **Classification / Marketing Analytics**
 - [Home-Credit-Default-Risk](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Home-Credit-Default-Risk) — **Classification / Credit Risk**
 - [Ecommerce-Performance-Insights](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Performance-Insights) — **EDA / Business Intelligence**
-- [Fintech-Advisor-Chatbot](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Fintech-Advisor-Chatbot) — **Conversational AI / NLP**
-- [NVIDIA-Insider-Tracker](https://github.com/Dotto-Luis/Projects/tree/main/Finance/NVIDIA-Insider-Tracker) — **Market Analysis / Stock Insights** *(WIP)*
-- [ARG-Blue](https://github.com/Dotto-Luis/Projects/tree/main/Finance/ARG-Blue) — **Web Scraping / FX Data**
+- [ARG-Blue](https://github.com/Dotto-Luis/Projects/tree/main/Finance/ARG-Blue) — **Argentina's Parallel FX Rates** *(in development)*
 
 ---
 

@@ -1,7 +1,5 @@
 # Bank Term Deposit Subscription Predictor #Classification
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/bank-term-deposit-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/bank-term-deposit-tests.yml)
-
 ![Cover](images/cover.png)
 
 ## Table of Contents

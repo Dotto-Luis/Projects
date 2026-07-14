@@ -1,15 +1,15 @@
 # 💰 Finance
 
-Data science and ML projects applied to financial services, e-commerce, and market analysis — covering credit risk, performance analytics, NLP, and quantitative research.
+Data science and ML projects applied to financial services, e-commerce and markets — credit risk, marketing analytics, performance analytics and quantitative research.
 
 | Project | What it demonstrates | Stack |
 |---|---|---|
-| [Ecommerce-Performance-Insights](Ecommerce-Performance-Insights/) | ELT pipeline + SQL analytics over 100k orders (revenue, delivery KPIs) | DuckDB · pandas · plotly · pytest |
-| [Home-Credit-Default-Risk](Home-Credit-Default-Risk/) | Credit scoring across 246k loan applications — 0.754 AUC-ROC | LightGBM · scikit-learn · pandas · uv |
-| [Bank-Term-Deposit-Subscription-Predictor](Bank-Term-Deposit-Subscription-Predictor/) | Binary classifier predicting term deposit subscriptions | LightGBM · scikit-learn · pandas · uv |
-| [Fintech-Advisor-Chatbot](Fintech-Advisor-Chatbot/) | NLP chatbot for financial Q&A | Python · NLP |
-| [NVIDIA-Insider-Tracker](NVIDIA-Insider-Tracker/) | Insider trade tracking and market signal analysis | Python · pandas |
-| [Quantitative-Finance-Data-Analysis](Quantitative-Finance-Data-Analysis/) | Quantitative analysis over NYSE data | Python · pandas · matplotlib |
-| [ARG-Blue](ARG-Blue/) | Web scraping of informal FX rate (blue dollar) in Argentina | Python · requests · BeautifulSoup |
+| [Ecommerce-Performance-Insights](Ecommerce-Performance-Insights/) | ELT pipeline + SQL analytics over 100k orders (revenue, delivery KPIs) | DuckDB · pandas · pytest |
+| [Home-Credit-Default-Risk](Home-Credit-Default-Risk/) | Credit scoring across 246k loan applications — 0.754 AUC-ROC | LightGBM · scikit-learn · uv |
+| [Bank-Term-Deposit-Subscription-Predictor](Bank-Term-Deposit-Subscription-Predictor/) | Imbalanced classification with explicit leakage analysis (0.95 fake vs 0.82 honest AUC) | scikit-learn · pandas · uv |
+| [Quantitative-Finance-Data-Analysis](Quantitative-Finance-Data-Analysis/) | Fundamental screener: indicators + sector-relative composite scoring *(in development)* | pandas · scikit-learn · uv |
+| [ARG-Blue](ARG-Blue/) | Tracking Argentina's parallel USD/ARS exchange rates over time *(in development)* | Python · web scraping |
 
-**Reading order as a narrative:** start with EPI for data engineering fundamentals (ELT + SQL); then Home Credit and Bank Term Deposit for supervised ML on real financial data; the remaining projects add breadth across NLP, market analysis, and web scraping.
+Completed projects include unit tests, CI (GitHub Actions) and reproducible environments (uv).
+
+**Reading order as a narrative:** EPI for data engineering fundamentals (ELT + SQL); Home Credit and Bank Term Deposit for supervised ML on real financial data — both with the leakage discussions that separate honest models from inflated ones; the Fundamental Screener systematizes years of discretionary investing into code; ARG-Blue explores one of the world's most unusual currency markets.

@@ -1,53 +1,44 @@
-# ARG-Blue #WebScraping
+# ARG-Blue — Argentina's Parallel Dollar #WIP
 
-![Cover](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/24701-nature-natural-beauty.jpg/1280px-24701-nature-natural-beauty.jpg)
+> **Status: early stage.** Two working scraping notebooks; the multi-rate tracker described below is the goal.
 
 ## Table of Contents
 
-1. [Business Goal](#business-goal)
-2. [About the Data](#about-the-data)
-3. [Usage Examples](#usage-examples)
-4. [Project Structure](#project-structure)
-5. [Requirements](#requirements)
-6. [Tests](#tests)
-7. [Contributing](#contributing)
-8. [License](#license)
-9. [Project Origin](#project-origin)
+1. [Business Goal](#1-business-goal)
+2. [About the Data](#2-about-the-data)
+3. [Usage Examples](#3-usage-examples)
+4. [Project Structure](#4-project-structure)
+5. [Requirements](#5-requirements)
+6. [Tests](#6-tests)
+7. [Results / Output](#7-results--output)
+8. [License](#8-license)
+9. [Project Origin](#9-project-origin)
 
 ---
 
 ## 1. Business Goal
 
-Argentina has a dual exchange rate system where the unofficial "blue dollar" (dólar blue) often trades at a significant premium over the official rate. This project scrapes real-time and historical USD/ARS blue dollar exchange rate data from public sources, enabling financial analysis and monitoring of Argentina's informal currency market.
+Argentina is one of the few economies in the world where a single currency pair trades at **multiple simultaneous exchange rates**. Alongside the official USD/ARS rate, parallel quotes have coexisted for years — each reflecting a different legal channel, restriction or risk premium:
 
-Key objectives:
-- Automate extraction of blue dollar rates from web sources.
-- Store and structure historical rate data for time-series analysis.
-- Enable trend monitoring and comparison between official and unofficial rates.
+- **Oficial** — the government-set rate, historically subject to access restrictions ("cepo").
+- **Blue** — the informal cash market rate, the price most Argentinians actually face.
+- **MEP / Bolsa** — implicit rate from buying bonds in pesos and selling them in dollars locally.
+- **CCL (Contado con Liquidación)** — implicit rate for moving dollars abroad via securities.
+- **Tarjeta / turista, crypto and others** — rates with specific taxes or channels layered on top.
+
+The goal of this project is to **replicate that multi-rate reality as faithfully as possible and track its evolution over time**: collect the parallel quotes, structure them as time series, and analyze the spreads between rates — the *brecha cambiaria*, an indicator of devaluation expectations, monetary policy stress and capital-control intensity.
 
 ---
 
 ## 2. About the Data
 
-Data is scraped from [dolarhistorico.com](https://dolarhistorico.com/cotizacion-dolar-blue), which publishes daily unofficial USD/ARS exchange rate quotes.
-
-Key fields extracted:
-- Date of the quote
-- Buy price (compra)
-- Sell price (venta)
-- Spread between buy/sell prices
+Currently scraped from [dolarhistorico.com](https://dolarhistorico.com/cotizacion-dolar-blue) (daily blue dollar quotes: date, buy/sell price, spread). Planned: public APIs with historical multi-rate coverage to backfill consistent series for every parallel rate.
 
 ---
 
 ## 3. Usage Examples
 
-Run the scraper to fetch current and historical blue dollar rates:
-
-```bash
-jupyter nbconvert --to notebook --execute blueUSD_ars_webscrapping.ipynb
-```
-
-Or open the notebooks interactively:
+Current state — run the scraping notebooks:
 
 ```bash
 jupyter notebook blueUSD_ars_webscrapping.ipynb
@@ -61,9 +52,9 @@ jupyter notebook blueUSD_ars_webscrapping.ipynb
   <summary>📂 Expand for Project Structure</summary>
 
 ```console
-├── blueUSD_ars_webscrapping.ipynb   # Main scraping and analysis notebook
-├── Web_scrapping.ipynb              # Web scraping exploration notebook
-├── ARG-Blue.md                      # Project notes
+├── Web_scrapping.ipynb              # Scraping exploration
+├── blueUSD_ars_webscrapping.ipynb   # Blue dollar rate scraper
+├── images/
 └── README.md
 ```
 </details>
@@ -72,32 +63,19 @@ jupyter notebook blueUSD_ars_webscrapping.ipynb
 
 ## 5. Requirements
 
-```bash
-pip install -r requirements.txt
-```
-
-Key dependencies:
-- requests
-- beautifulsoup4
-- pandas
+Python with pandas, requests and BeautifulSoup (notebook-based for now; uv environment planned with the restructure).
 
 ---
 
 ## 6. Tests
 
-*Tests coming soon.*
+Not yet — planned together with the extraction modules when the project is restructured (`src/` + tests, following the portfolio standard).
 
 ---
 
-## 7. Contributing
+## 7. Results / Output
 
-Contributions are welcome. To contribute:
-
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a Pull Request.
+Current: scraped blue dollar quotes (date, buy, sell, spread). Target: a multi-rate time-series dataset and spread analysis — blue/oficial *brecha* over time, MEP-CCL divergences, and event annotations for policy changes.
 
 ---
 
@@ -109,4 +87,4 @@ This project is licensed under the MIT License.
 
 ## 9. Project Origin
 
-Personal project to monitor Argentina's informal currency market using web scraping techniques.
+Personal project, born from following Argentina's currency markets firsthand. The "blue dollar" is the colloquial name for the informal cash USD rate in Argentina.

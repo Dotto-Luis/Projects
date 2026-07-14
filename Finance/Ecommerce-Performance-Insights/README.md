@@ -1,7 +1,5 @@
 # Ecommerce Performance Insights — Olist #EDA
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/ecommerce-performance-insights-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/ecommerce-performance-insights-tests.yml)
-
 ![Cover](images/cover.png)
 
 ## Table of Contents

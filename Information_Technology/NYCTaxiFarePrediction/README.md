@@ -1,6 +1,5 @@
 # NYC Taxi Fare & Trip Duration Prediction #Regression
 
-[![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/nyc-taxi-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/nyc-taxi-tests.yml)
 
 ![Cover](images/cover.png)
 

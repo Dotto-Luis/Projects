@@ -1,0 +1,28 @@
+[project]
+name = "quantitative-finance-data-analysis"
+version = "1.0.0"
+description = "CRISP-DM exploratory analysis of NYSE prices, fundamentals and securities (Kaggle NYSE dataset)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+    # funpymodeling caps seaborn at <0.13
+    "seaborn>=0.12,<0.13",
+    "plotly>=5.0",
+    "scipy>=1.10",
+    "funpymodeling>=0.1",
+    "jupyter>=1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv]
+package = false
