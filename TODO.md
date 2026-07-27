@@ -6,5 +6,6 @@
 - [x] **IT-LLM-Job-Finder-Agent:** cover subido a `images/cover.png`. ✔
 - [ ] **IT-LLM-Job-Finder-Agent:** smoke test end-to-end con API key (`etl.py` + `chainlit run` + conversación real).
 - [ ] **Perfil GitHub:** actualizar métrica de Home-Credit a 0.754 (LightGBM) y evaluar sumar Banking RAG a featured.
+- [ ] **Idea "proyecto casitas" (Real Estate):** proyecto de valuación inmobiliaria aprovechando el background de agente inmobiliario — el segundo sector con edge de dominio después de Finance. Base técnica posible: Kaggle House Prices/Ames (https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques); versión con alma: datos del mercado español (idealista/fotocasa) o argentino. Reemplazaría al viejo Housing-Ames (archivado, solo tenía un readme).
 - [ ] **Unificar carpetas de imágenes a `images/` (minúscula)** al pulir cada proyecto: hoy conviven `Images/`, `pics/` y `assets/`. Ojo con el casing en GitHub (case-sensitive) al renombrar: usar `git mv` y actualizar los links de los READMEs.
 - [ ] **Migrar a uv los proyectos ya terminados** (otro día, no urgente): `pyproject.toml` + `uv.lock` en IT-LLM-Job-Finder-Agent y Ecommerce-Performance-Insights vía `uv add -r requirements.txt`, y actualizar sus workflows de CI a `astral-sh/setup-uv` + `uv sync`. Los proyectos nuevos ya nacen con uv (empezando por Banking RAG Chatbot).

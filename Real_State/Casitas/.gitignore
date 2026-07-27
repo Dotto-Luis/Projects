@@ -1,0 +1,40 @@
+# ==========================================================================
+# SENSITIVE — files produced by live scraping contain third-party personal
+# data (agent names + phone numbers in the `anunciante` column). Never commit.
+# Only the anonymized sample and the final ranking are versioned.
+# ==========================================================================
+
+# WhatsApp exports (private conversations, third-party contacts).
+# Exact names only — do NOT use *_chat.txt: it would also match the
+# sanitized links_from_chat.txt, which is safe to commit.
+/_chat.txt
+data/raw/_chat.txt
+
+# Raw scraper output (contains `anunciante` = name + phone)
+data/raw/*_scraped_*.csv
+data/interim/
+data/logs/
+data/db/
+
+# Processed data — except the anonymized sample
+data/processed/*
+!data/processed/sample_anonymized.csv
+
+# ==========================================================================
+# Environment & caches
+# ==========================================================================
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ==========================================================================
+# OS
+# ==========================================================================
+.DS_Store
+
+# ==========================================================================
+# Local-only notes
+# ==========================================================================
+SENSITIVE_REVIEW.md

@@ -1,0 +1,32 @@
+name: Casitas tests
+
+on:
+  push:
+    paths:
+      - "Real_State/Casitas/**"
+      - ".github/workflows/casitas-tests.yml"
+  pull_request:
+    paths:
+      - "Real_State/Casitas/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Real_State/Casitas
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: Real_State/Casitas/uv.lock
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      # Unit tests are fully offline: no Ollama server, no browser, no scraped
+      # data. The `ollama` import is stubbed in conftest.py when unavailable.
+      - name: Run unit tests
+        run: uv run pytest tests -v

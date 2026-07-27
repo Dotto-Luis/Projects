@@ -1,0 +1,8 @@
+undetected-chromedriver
+beautifulsoup4
+pandas
+selenium
+python-dotenv
+notebook
+ollama
+duckdb

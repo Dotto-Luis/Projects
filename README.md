@@ -14,6 +14,7 @@ Production-quality projects with tests, CI, and full documentation:
 
 - [**IT-LLM-Job-Finder-Agent**](https://github.com/Dotto-Luis/Projects/tree/main/Information_Technology/IT-LLM-Job-Finder-Agent) — LLM agent with RAG: resume in, matched jobs + tailored cover letters out. LangChain · ChromaDB · Chainlit [![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/it-llm-job-finder-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/it-llm-job-finder-tests.yml)
 - [**Ecommerce-Performance-Insights**](https://github.com/Dotto-Luis/Projects/tree/main/Finance/Ecommerce-Performance-Insights) — ELT pipeline over 100k Olist orders: revenue & delivery KPIs. Python · DuckDB · SQL [![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/ecommerce-performance-insights-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/ecommerce-performance-insights-tests.yml)
+- [**Casitas**](https://github.com/Dotto-Luis/Projects/tree/main/Real_State/Casitas) — Real estate investment screener: 7-platform scraping → local LLM scoring → bilingual PDF report. Ollama · Mistral 7B · Selenium [![Tests](https://github.com/Dotto-Luis/Projects/actions/workflows/casitas-tests.yml/badge.svg)](https://github.com/Dotto-Luis/Projects/actions/workflows/casitas-tests.yml)
 
 🌐 Full portfolio: [dotto-luis.github.io](https://dotto-luis.github.io/)
 
@@ -50,6 +51,7 @@ Production-quality projects with tests, CI, and full documentation:
 ---
 
 ## 🏢 Real Estate
+- [Casitas](https://github.com/Dotto-Luis/Projects/tree/main/Real_State/Casitas) — **Investment Screener / Local LLM + Web Scraping**
 - [Real-Estate-Price-Predictor](https://github.com/Dotto-Luis/Projects/tree/main/Real_State/Real-Estate-Price-Predictor) — **Regression / Real Estate Valuation**
 - [Housing-Price-Prediction-Ames](https://github.com/Dotto-Luis/Projects/tree/main/Real_State/Housing-Price-Prediction-Ames) — **Regression / Property Analytics** *(WIP)*
 

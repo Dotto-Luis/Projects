@@ -1,0 +1,332 @@
+================================================================================
+PROJECT: CASITAS
+Real Estate Investment Analysis Pipeline with AI-Powered Scoring
+================================================================================
+
+OVERVIEW
+--------
+Casitas is an end-to-end real estate investment analysis system that scrapes
+residential properties from multiple Spanish real estate platforms, applies
+AI-based composite scoring using a Buy Box investment criteria framework,
+and generates professional bilingual investment reports (English + Spanish).
+
+The project was built to help a family searching for a home in Málaga, Spain.
+They were sharing listings in a WhatsApp group and comparing them by hand, which
+was taking weeks. The pipeline analyzed 136 properties and identified 102 viable
+targets classified into three tiers: Strong Opportunities, Worth Visit, Price Only.
+
+OBJECTIVE
+---------
+Provide institutional-grade investment analysis by:
+1. Aggregating property listings from 7 real estate platforms
+2. Applying composite AI scoring based on investment criteria
+3. Generating actionable investment recommendations
+4. Delivering professional bilingual reports with data visualizations
+
+KEY FEATURES
+------------
+1. Multi-Source Web Scraping
+   - Idealista (largest Spanish platform)
+   - Fotocasa
+   - Pisos.com
+   - YaEncontre
+   - Tecnocasa
+   - Habitaclia
+   - Custom data enrichment from multiple sources
+
+2. LLM-Based Property Scoring
+   - Local inference using Ollama + Mistral 7B model
+   - Composite scoring framework: Location (25%), Condition (25%),
+     Distribution (20%), Financial (20%), Intangibles (10%)
+   - Classification into tiers:
+     * Strong Opportunity (85-100): Excellent fundamentals
+     * Worth Visit (70-84): Good potential, in-situ verification needed
+     * Price Only (60-69): Marginal, negotiation-dependent
+     * Discard (<60): Poor fundamentals
+
+3. Professional Report Generation
+   - Bilingual output (English page 1, Spanish page 3)
+   - Design System: Luis Dotto Portfolio (Apple-inspired minimalism)
+   - 4 data visualizations with pastel traffic-light color scheme:
+     * Pie chart: Recommendation distribution
+     * Box plot: Price ranges by opportunity tier
+     * Histogram: EUR/m² market baseline
+     * Scatter plot: Score vs Price ranking (97 properties plotted)
+   - Compact layout: 2 pages per language (4 total)
+   - Language indicators (top-right, subtle)
+   - Top 5 opportunities table with explanations
+
+TECHNICAL STACK
+---------------
+Language: Python 3.10+
+Core Libraries:
+  - pandas: Data manipulation and analysis
+  - matplotlib: Chart generation (scatter, pie, box, histogram)
+  - selenium/requests: Web scraping
+  - reportlab: PDF generation
+  - ollama: Local LLM inference
+
+Package Management: uv (no virtual environment, uv handles dependencies)
+
+Local LLM:
+  - Ollama server (must be running)
+  - Model: Mistral 7B (mistral)
+  - Inference: ~1-2 seconds per property
+
+Data Persistence:
+  - CSV format throughout pipeline
+  - DuckDB-ready structure (future optimization)
+
+PROJECT STRUCTURE
+-----------------
+casitas/
+├── README.md (project documentation)
+├── data/
+│   ├── raw/ (scraped HTML, if cached)
+│   ├── interim/ (cleaned, combined csvs)
+│   ├── processed/ (enriched, ready for scoring)
+│   └── output/ (final rankings, charts, reports)
+├── src/
+│   ├── scraper_idealista.py (Idealista platform)
+│   ├── scraper_fotocasa.py (Fotocasa platform)
+│   ├── scraper_pisos.py (Pisos.com platform)
+│   ├── scraper_yaencuentre.py (YaEncontre platform)
+│   ├── scraper_tecnocasa.py (Tecnocasa platform)
+│   ├── scraper_habitaclia.py (Habitaclia platform)
+│   ├── scoring.py (LLM-based property scoring)
+│   ├── generate_graphics.py (4 chart generation)
+│   └── generate_report.py (PDF report generation)
+├── config/
+│   └── buy_box_malaga_2026.md (investment criteria document)
+├── notebooks/
+│   ├── 00_setup.ipynb (environment verification)
+│   ├── 01_exploration.ipynb (raw data inspection)
+│   ├── 02_cleaning.ipynb (data quality, deduplication)
+│   ├── 03_enrichment.ipynb (feature engineering)
+│   └── 04_analysis.ipynb (exploratory analysis)
+├── pyproject.toml (uv dependency configuration)
+└── .gitignore (exclude raw data, credentials)
+
+DATA PIPELINE STAGES
+--------------------
+Stage 1: Raw Scraping
+  Input: Live web platforms
+  Output: data/raw/ (HTML, JSON per platform)
+  Scripts: src/scraper_*.py
+
+Stage 2: Interim Processing
+  Input: data/raw/
+  Output: data/interim/combined_raw_YYYYMMDD.csv
+  Tasks: Combine sources, standardize columns, normalize text
+
+Stage 3: Processed (Ready for Scoring)
+  Input: data/interim/
+  Output: data/processed/activos_YYYYMMDD.csv
+  Tasks: Deduplicate, enrich location, clean prices, normalize m²
+  Spanish column names (required for scraper compatibility):
+    url, titulo, ubicacion, precio, m2, habitaciones, baños,
+    planta, ascensor, tipo, estado, año, comentario, plataforma
+
+Stage 4: Scoring
+  Input: data/processed/
+  Output: data/output/ranking_final_YYYYMMDD.csv
+  Process: LLM evaluation via Ollama (Mistral 7B)
+  New columns: score_total (0-100), recommendation (category)
+
+Stage 5: Visualization
+  Input: data/output/ranking_final_YYYYMMDD.csv
+  Output: data/output/graphic_*.png (4 charts)
+
+Stage 6: Report Generation
+  Input: ranking_final_*.csv + graphics
+  Output: data/output/report_casitas_YYYYMMDD.pdf
+  Format: 4-page bilingual PDF
+
+COLUMN NAMING CONVENTION
+------------------------
+Spanish names maintained throughout pipeline (scraper compatibility):
+  titulo: Property title/description
+  ubicacion: Address/location
+  precio: Price in EUR
+  m2: Square meters
+  habitaciones: Bedrooms
+  baños: Bathrooms
+  planta: Floor level
+  ascensor: Elevator (yes/no)
+  tipo: Property type (apartment, house, etc)
+  estado: Condition (reforma, buen estado, etc)
+  año: Year built/renovated
+  comentario: Additional notes
+  plataforma: Source platform
+
+Post-scoring additions:
+  score_total: Composite score (0-100)
+  recommendation: Category (strong_opportunity, worth_visit, price_only, discard)
+  precio_por_m2: Computed price per sqm
+
+COLOR SCHEME (Pastel Traffic Light)
+-----------------------------------
+Strong Opportunity: #A8D8A8 (Pastel Green)
+Worth Visit:        #FFD699 (Pastel Yellow)
+Price Only:         #F0A0A0 (Pastel Red)
+
+Design System: Luis Dotto Portfolio
+  Primary BG: #f8f8f6 (warm white)
+  Text Primary: #1d1d1f (Apple black)
+  Text Secondary: #6e6e73 (muted)
+  Accent: #193747 (dark teal)
+  Border: #d2d2d7 (delicate)
+  Typography: Apple-system font stack, line-height 1.6
+
+USAGE INSTRUCTIONS
+------------------
+Prerequisites:
+  1. Python 3.10+
+  2. uv package manager (pip install uv)
+  3. Ollama running locally (ollama serve)
+  4. Mistral 7B model pulled (ollama pull mistral)
+
+Installation:
+  1. Clone repo: git clone <repo-url>
+  2. cd casitas
+  3. uv sync (install dependencies)
+
+Running the Pipeline:
+  1. Execute scrapers (in order):
+     uv run python src/scraper_idealista.py
+     uv run python src/scraper_fotocasa.py
+     (repeat for other platforms)
+
+  2. Run scoring:
+     uv run python src/scoring.py
+
+  3. Generate visualizations:
+     uv run python src/generate_graphics.py
+
+  4. Generate report:
+     uv run python src/generate_report.py
+
+  Output: data/output/report_casitas_YYYYMMDD.pdf
+
+Jupyter Notebooks (Optional - for analysis/debugging):
+  uv run jupyter notebook
+  Then open notebooks/ and run cells sequentially
+
+INPUT REQUIREMENTS
+------------------
+- Internet connection (for live scraping)
+- Ollama server running on localhost:11434
+- Mistral 7B model (~4GB disk space)
+- ~500MB for raw data (136 properties × 7 platforms)
+
+OUTPUT DELIVERABLES
+-------------------
+1. Ranking CSV: ranking_final_YYYYMMDD.csv
+   - 102 viable properties
+   - Scores, recommendations, prices, location data
+
+2. Charts (PNG, 150 DPI):
+   - graphic_score-price_YYYYMMDD.png (scatter, viable properties labeled)
+   - graphic_recommendation_distribution_YYYYMMDD.png (pie)
+   - graphic_price_per_sqm_histogram_YYYYMMDD.png (histogram)
+   - graphic_price_range_by_recommendation_YYYYMMDD.png (box plot)
+
+3. Report PDF (2 pages per language):
+   - Page 1 (English): Summary, analysis, pie + box charts
+   - Page 2 (English): Market distribution, histogram, scatter, top 5
+   - Page 3 (Spanish): Same layout, Spanish labels
+   - Page 4 (Spanish): Continuation
+
+   Size: ~300KB
+   Quality: 300 DPI (professional print-ready)
+
+RESULTS (MALAGA 2026 ANALYSIS)
+------------------------------
+Total properties analyzed: 136
+Viable properties (score > 0): 102
+Distribution:
+  - Strong Opportunities (85-100): 13 properties
+  - Worth Visit (70-84): 72 properties
+  - Price Only (60-69): 17 properties
+  - Discarded (<60): 34 properties (excluded from report)
+
+Price Analysis (viable properties only):
+  - Average price: EUR 193,051
+  - Price range: EUR 600 - EUR 295,000  (the EUR 600 low end is a known
+    parsing artifact of an atypical listing — see KNOWN LIMITATIONS)
+  - Average EUR/m²: EUR 2,933
+
+Top 5 Opportunities:
+  1. Venta de piso en La Luz (Score: 85)
+  2. Piso en venta en Vistafranca (Score: 85)
+  3. Piso en venta en Olletas (Score: 85)
+  4. Piso en venta en Calle Santa María (Score: 85)
+  5. Piso en venta en Conde de Ureña (Score: 85)
+
+KNOWN LIMITATIONS
+-----------------
+1. Buy Box not injected into the prompt (published run):
+   The criteria document is loaded but the scoring prompt used generic tier
+   descriptions instead of the real zone/price thresholds. score_property()
+   now accepts a `buy_box` argument to enable the injection; re-running with
+   it should sharpen the scores.
+
+2. Coarse score distribution:
+   Only 15 distinct scores across 102 properties (range 58-85), clustering at
+   tier boundaries — a direct symptom of limitation #1.
+
+3. Price parsing artifact:
+   One listing is recorded at EUR 600. The cleaning stage needs an outlier
+   guard for atypical price formats.
+
+IMPORTANT NOTES
+---------------
+1. Scraper Language:
+   - All scraper code remains in Spanish (web is in Spanish)
+   - Column names in Spanish throughout pipeline
+   - Translated only: comments, logging, analysis output
+
+2. LLM Considerations:
+   - Requires local Ollama instance (privacy, speed)
+   - Mistral 7B: ~1-2s per property on standard hardware
+   - Scoring is deterministic (set seed if reproducibility needed)
+   - Handles Spanish property data natively
+
+3. Data Privacy:
+   - No API keys required (direct web scraping)
+   - No cloud services used
+   - All processing local
+   - Output CSVs can be deleted after report generation
+
+4. Report Design:
+   - Single-page minimalist approach (requested by the family)
+   - Apple-inspired design system applied
+   - Color-coded recommendations (traffic light)
+   - Language badges for clarity
+   - Professional print-ready output
+
+5. Future Optimization:
+   - Replace CSV with DuckDB for large datasets
+   - Add caching layer (Ollama, scraper requests)
+   - Parallel scraping (Thread pool)
+   - Incremental updates (delta scraping)
+   - Dashboard UI (Streamlit/Dash)
+
+DEPLOYMENT CONSIDERATIONS
+-------------------------
+- Runs on macOS, Linux, Windows (tested on macOS 13+)
+- Headless scrapers (no browser window needed)
+- Containerization: Dockerfile ready for cloud deployment
+- GitHub Actions: CI/CD for automated report generation
+- Credentials: Use environment variables for platform auth (if needed)
+
+CONTACT & LICENSING
+-------------------
+Author: Luis Dotto
+Project: Casitas (Real Estate Investment Analysis)
+Status: Production-ready (v1.0)
+License: MIT (or specify)
+Date Created: July 2026
+Last Updated: July 25, 2026
+
+================================================================================
